@@ -292,7 +292,12 @@ NeuralAmpModeler::NeuralAmpModeler(const InstanceInfo& info)
       IGraphics* ui = pCaller->GetUI();
       if (auto* backdrop = ui->GetControlWithTag(kCtrlTagParametricOverlayBackdrop))
         backdrop->Hide(false);
-      const int numParams = mModel ? mModel->GetNumParams() : 0;
+      // Same mModel-vs-mStagedModel fallback as _UpdateControlsFromModel(): a model restored
+      // from saved session state is staged synchronously but only promoted to mModel inside
+      // ProcessBlock() on the audio thread, which a host isn't obligated to have run yet by
+      // the time the user clicks this icon.
+      ResamplingNAM* pModelForUI = mModel ? mModel.get() : mStagedModel.get();
+      const int numParams = pModelForUI ? pModelForUI->GetNumParams() : 0;
       for (int i = 0; i < kNumParametricKnobs; i++)
         if (auto* knob = ui->GetControlWithTag(kCtrlTagParametricKnob0 + i))
           knob->Hide(i >= numParams);
@@ -573,7 +578,7 @@ void NeuralAmpModeler::OnUIOpen()
       SendControlMsgFromDelegate(kCtrlTagIRFileBrowser, kMsgTagLoadFailed);
   }
 
-  if (mModel != nullptr)
+  if (mModel != nullptr || mStagedModel != nullptr)
   {
     _UpdateControlsFromModel();
   }
@@ -1048,7 +1053,18 @@ void NeuralAmpModeler::_ProcessOutput(iplug::sample** inputs, iplug::sample** ou
 
 void NeuralAmpModeler::_UpdateControlsFromModel()
 {
-  if (mModel == nullptr)
+  // Fall back to the staged model when the live one isn't promoted yet: staging (from
+  // _StageModel(), including the synchronous restore-from-saved-state path in
+  // Unserialization.cpp) only moves mStagedModel -> mModel inside _ApplyDSPStaging(), which
+  // runs on the audio thread as part of ProcessBlock(). A host isn't obligated to render audio
+  // just because a project was opened -- if the user opens this plugin's editor before ever
+  // starting playback, mModel can stay null indefinitely even though a model was already
+  // synchronously loaded into mStagedModel, and this whole UI sync (icon visibility,
+  // calibration controls, parametric names/switches) would otherwise silently never run.
+  // Read-only for UI display purposes; only _ApplyDSPStaging() ever assigns to mModel or
+  // mStagedModel, so this doesn't touch the promotion itself or its thread-safety.
+  ResamplingNAM* pModelForUI = mModel ? mModel.get() : mStagedModel.get();
+  if (pModelForUI == nullptr)
   {
     return;
   }
@@ -1056,33 +1072,33 @@ void NeuralAmpModeler::_UpdateControlsFromModel()
   {
     ModelInfo modelInfo;
     modelInfo.sampleRate.known = true;
-    modelInfo.sampleRate.value = mModel->GetEncapsulatedSampleRate();
-    modelInfo.inputCalibrationLevel.known = mModel->HasInputLevel();
-    modelInfo.inputCalibrationLevel.value = mModel->HasInputLevel() ? mModel->GetInputLevel() : 0.0;
-    modelInfo.outputCalibrationLevel.known = mModel->HasOutputLevel();
-    modelInfo.outputCalibrationLevel.value = mModel->HasOutputLevel() ? mModel->GetOutputLevel() : 0.0;
+    modelInfo.sampleRate.value = pModelForUI->GetEncapsulatedSampleRate();
+    modelInfo.inputCalibrationLevel.known = pModelForUI->HasInputLevel();
+    modelInfo.inputCalibrationLevel.value = pModelForUI->HasInputLevel() ? pModelForUI->GetInputLevel() : 0.0;
+    modelInfo.outputCalibrationLevel.known = pModelForUI->HasOutputLevel();
+    modelInfo.outputCalibrationLevel.value = pModelForUI->HasOutputLevel() ? pModelForUI->GetOutputLevel() : 0.0;
 
     static_cast<NAMSettingsPageControl*>(pGraphics->GetControlWithTag(kCtrlTagSettingsBox))->SetModelInfo(modelInfo);
 
-    const bool disableInputCalibrationControls = !mModel->HasInputLevel();
+    const bool disableInputCalibrationControls = !pModelForUI->HasInputLevel();
     pGraphics->GetControlWithTag(kCtrlTagCalibrateInput)->SetDisabled(disableInputCalibrationControls);
     pGraphics->GetControlWithTag(kCtrlTagInputCalibrationLevel)->SetDisabled(disableInputCalibrationControls);
     {
       auto* c = static_cast<OutputModeControl*>(pGraphics->GetControlWithTag(kCtrlTagOutputMode));
-      c->SetNormalizedDisable(!mModel->HasLoudness());
-      c->SetCalibratedDisable(!mModel->HasOutputLevel());
+      c->SetNormalizedDisable(!pModelForUI->HasLoudness());
+      c->SetCalibratedDisable(!pModelForUI->HasOutputLevel());
     }
 
     if (auto* pSlimIcon = pGraphics->GetControlWithTag(kCtrlTagSlimmableIcon))
     {
-      const bool show = mModel->GetSlimmableModel() != nullptr;
+      const bool show = pModelForUI->GetSlimmableModel() != nullptr;
       pSlimIcon->Hide(!show);
     }
 
     if (auto* pParametricIcon = pGraphics->GetControlWithTag(kCtrlTagParametricIcon))
     {
-      const int numParams = mModel->GetNumParams();
-      const auto paramDefs = mModel->GetParameterDefs();
+      const int numParams = pModelForUI->GetNumParams();
+      const auto paramDefs = pModelForUI->GetParameterDefs();
       const int numDefs = static_cast<int>(paramDefs.size());
       pParametricIcon->Hide(numParams <= 0);
 
@@ -1125,8 +1141,9 @@ void NeuralAmpModeler::_UpdateControlsFromModel()
 
       for (int i = 0; i < kNumParametricKnobs; i++)
       {
-        auto* pKnob = pGraphics->GetControlWithTag(kCtrlTagParametricKnob0 + i);
-        if (pKnob == nullptr)
+        const int tag = kCtrlTagParametricKnob0 + i;
+        auto* pControl = pGraphics->GetControlWithTag(tag);
+        if (pControl == nullptr)
           continue;
 
         const bool eligible = i < numParams && i < numDefs;
@@ -1137,7 +1154,7 @@ void NeuralAmpModeler::_UpdateControlsFromModel()
           // generic parameter list would keep showing stale, no-longer-meaningful names.
           const int paramIdx = kParametricKnob0 + i;
           GetParam(paramIdx)->InitDouble(("Param" + std::to_string(i + 1)).c_str(), 0.5, 0.0, 1.0, 0.001);
-          pKnob->Hide(true);
+          pControl->Hide(true);
           continue;
         }
 
@@ -1149,15 +1166,35 @@ void NeuralAmpModeler::_UpdateControlsFromModel()
 
         // Reconfigure this slot's declared range/name/default from the model's own metadata.
         GetParam(paramIdx)->InitDouble(label.c_str(), def.default_val, def.min_val, def.max_val, step);
-        if (auto* pKnobControl = pKnob->As<NAMKnobControl>())
+
+        // A switch of the wrong state count (or a knob, when this slot is now discrete --
+        // or vice versa) can't be reconfigured in place: IVTabSwitchControl bakes its button
+        // count in at construction. Swap in a fresh instance of whichever type/size this slot
+        // now needs, but only when it actually differs from what's already attached, so a
+        // reloaded model with the same shape doesn't churn controls every idle tick.
+        const int desiredSteps =
+          (def.steps >= 2 && def.steps <= NAMParametricSwitchControl::kMaxStates) ? def.steps : 0;
+        if (mParametricSlotSteps[i] != desiredSteps)
         {
-          pKnobControl->SetLabelStr(label.c_str());
-          pKnobControl->SetTargetAndDrawRECTs(parametricPanelArea.GetGridCell(i / cols, i % cols, rows, cols));
+          const IRECT cellArea = parametricPanelArea.GetGridCell(i / cols, i % cols, rows, cols);
+          pGraphics->RemoveControlWithTag(tag);
+          if (desiredSteps > 0)
+            pControl = pGraphics->AttachControl(
+              new NAMParametricSwitchControl(cellArea, paramIdx, desiredSteps, style), tag);
+          else
+            pControl = pGraphics->AttachControl(
+              new NAMKnobControl(cellArea, paramIdx, "", style, pGraphics->LoadBitmap(KNOBBACKGROUND_FN)), tag);
+          mParametricSlotSteps[i] = desiredSteps;
         }
-        // Push the (possibly just-reset) value to the knob control's visual position.
+
+        if (auto* pVectorControl = dynamic_cast<IVectorBase*>(pControl))
+          pVectorControl->SetLabelStr(label.c_str());
+        pControl->SetTargetAndDrawRECTs(parametricPanelArea.GetGridCell(i / cols, i % cols, rows, cols));
+
+        // Push the (possibly just-reset) value to the control's visual position.
         SendParameterValueFromDelegate(paramIdx, GetParam(paramIdx)->GetNormalized(), true);
 
-        pKnob->Hide(!overlayOpen);
+        pControl->Hide(!overlayOpen);
       }
 
       // InitDouble() above updates each IParam's own name/range immediately, but a host's

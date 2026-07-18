@@ -298,9 +298,10 @@ private:
   void _SetInputGain();
   void _SetOutputGain();
   void _ApplySlimParamToLoadedNAMs();
-  // Reads the current values of kParametricKnob0..kParametricKnob3 (normalized to [0,1]
-  // against each knob's currently-configured range) and applies them to mModel and
-  // mStagedModel via SetKnobValues(), truncated to each model's own GetNumParams().
+  // Reads the current values of kParametricKnob0..kParametricKnob(kNumParametricKnobs-1)
+  // (in each knob's own real-unit range, matching what SetKnobValues() expects) and applies
+  // them to mModel and mStagedModel via SetKnobValues(), truncated to each model's own
+  // GetNumParams().
   void _ApplyParametricParamsToLoadedNAMs();
 
   // See: Unserialization.cpp
@@ -349,6 +350,12 @@ private:
   // Flags to take away the modules at a safe time.
   std::atomic<bool> mShouldRemoveModel = false;
   std::atomic<bool> mShouldRemoveIR = false;
+  // Per parametric-knob-slot record of which concrete control is currently attached at
+  // kCtrlTagParametricKnob0+i: 0 means a continuous NAMKnobControl, N>=2 means an N-state
+  // NAMParametricSwitchControl. Compared against each slot's freshly-loaded DSPParamDef::steps
+  // in _UpdateControlsFromModel() to decide whether that slot's control needs to be swapped
+  // for a different one (a switch's button count can't be changed in place once built).
+  int mParametricSlotSteps[kNumParametricKnobs] = {};
 
   std::atomic<bool> mNewModelLoadedInDSP = false;
   std::atomic<bool> mModelCleared = false;

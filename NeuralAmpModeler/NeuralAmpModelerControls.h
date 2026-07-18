@@ -121,6 +121,44 @@ public:
   }
 };
 
+// A vertical multi-position switch for a discrete (steps > 1) parametric parameter --
+// e.g. a 3-way tone selector -- as distinct from NAMKnobControl's continuous sweep.
+// Positions are just numbered "1".."N": the model has no per-position semantic labels,
+// only a count (DSPParamDef::steps).
+//
+// Unlike NAMKnobControl (whose range is just data, reconfigured via GetParam()->InitDouble()
+// as different models load into the same pre-created control), IVTabSwitchControl bakes its
+// button count in at construction time -- there's no API to change it in place. So a slot
+// whose active model declares a different step count than whatever's currently attached gets
+// an entirely fresh instance instead; see NeuralAmpModeler::_UpdateControlsFromModel().
+class NAMParametricSwitchControl : public IVTabSwitchControl
+{
+public:
+  // Realistic ceiling for a physical-style switch: actual circuits are 2-6 positions, and
+  // vertically stacking much beyond this in a ~100px-wide, ~144px-tall knob-panel cell (the
+  // same cell a knob would occupy) stops being legible. A model that declares more than this
+  // falls back to being rendered as a continuous knob instead (see kNumParametricKnobs usage
+  // in NeuralAmpModeler.cpp) rather than this control silently truncating its positions.
+  static constexpr int kMaxStates = 8;
+
+  NAMParametricSwitchControl(const IRECT& bounds, int paramIdx, int numStates, const IVStyle& style)
+  : IVTabSwitchControl(bounds, paramIdx, _Labels(numStates), "", style, EVShape::Rectangle, EDirection::Vertical)
+  {
+  }
+
+private:
+  // Fixed string-literal labels (static storage duration) rather than building
+  // std::to_string() results on the fly -- IVTabSwitchControl's ctor wants const char*
+  // pointers that outlive the call, and literals sidestep any temporary-lifetime question
+  // entirely rather than relying on the ctor copying them out before anything is freed.
+  static std::vector<const char*> _Labels(int numStates)
+  {
+    static const char* const kLabels[kMaxStates] = {"1", "2", "3", "4", "5", "6", "7", "8"};
+    numStates = std::max(1, std::min(numStates, kMaxStates));
+    return std::vector<const char*>(kLabels, kLabels + numStates);
+  }
+};
+
 class NAMSwitchControl : public IVSlideSwitchControl, public IBitmapBase
 {
 public:
