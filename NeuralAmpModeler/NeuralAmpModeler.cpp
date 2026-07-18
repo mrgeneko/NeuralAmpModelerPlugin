@@ -1132,6 +1132,11 @@ void NeuralAmpModeler::_UpdateControlsFromModel()
         const bool eligible = i < numParams && i < numDefs;
         if (!eligible)
         {
+          // Reset to a neutral placeholder rather than leaving a previously-loaded model's
+          // name (e.g. "Drive") stuck on a slot this model doesn't use -- otherwise a host's
+          // generic parameter list would keep showing stale, no-longer-meaningful names.
+          const int paramIdx = kParametricKnob0 + i;
+          GetParam(paramIdx)->InitDouble(("Param" + std::to_string(i + 1)).c_str(), 0.5, 0.0, 1.0, 0.001);
           pKnob->Hide(true);
           continue;
         }
@@ -1154,6 +1159,14 @@ void NeuralAmpModeler::_UpdateControlsFromModel()
 
         pKnob->Hide(!overlayOpen);
       }
+
+      // InitDouble() above updates each IParam's own name/range immediately, but a host's
+      // generic parameter list (e.g. Logic's "Controls" view) caches parameter metadata and
+      // won't re-query it on its own -- without this, it keeps showing the placeholder
+      // "Param1"/"Param2"/... names set at construction even after a parametric model loads
+      // and the custom Editor view's knobs correctly relabel themselves. This is a no-op on
+      // formats that don't override it (e.g. AAX/APP); AU and VST3 both implement it.
+      InformHostOfParameterDetailsChange();
 
       if (numParams <= 0 && pBackdrop != nullptr)
       {
