@@ -189,6 +189,7 @@
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -209,6 +210,7 @@
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -227,6 +229,7 @@
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -245,6 +248,7 @@
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(x64_LIB_PATHS);$(WDL_PATH)\lice\$(SolutionDir)build-win\$(Platform)\Release\;..\..\VST3_SDK\base\win\$(Platform)\Release\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
