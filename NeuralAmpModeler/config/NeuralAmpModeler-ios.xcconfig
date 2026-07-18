@@ -47,7 +47,7 @@ DEBUG_OPTIMIZE = 0 //0,1,2,3,s
 GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO
 
 // Uncomment to enable relaxed IEEE compliance
-//GCC_FAST_MATH = YES
+GCC_FAST_MATH = YES
 
 // Flags to pass to compiler for all builds
 GCC_CFLAGS = -Wno-write-strings
