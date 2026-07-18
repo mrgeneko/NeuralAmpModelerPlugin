@@ -65,7 +65,7 @@ END
 
 IDD_DIALOG_MAIN DIALOG 0, 0, 500, 300
 STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "NeuralAmpModeler"
+CAPTION "Anti-Static"
 MENU IDR_MENU1
 FONT 8, "MS Sans Serif"
 BEGIN
@@ -237,10 +237,10 @@ BEGIN
         BEGIN
             VALUE "FileVersion", "0.0.1"
             VALUE "ProductVersion", "0.0.1"
-            VALUE "FileDescription", "NeuralAmpModeler"
-            VALUE "InternalName", "NeuralAmpModeler"
-            VALUE "ProductName", "NeuralAmpModeler"
-            VALUE "CompanyName", "StevenAtkinson"
+            VALUE "FileDescription", "Anti-Static"
+            VALUE "InternalName", "AntiStatic"
+            VALUE "ProductName", "Anti-Static"
+            VALUE "CompanyName", "GeneKo"
             VALUE "LegalCopyright", "Copyright 2020 Acme Inc"
             VALUE "LegalTrademarks", "VST is a trademark of Steinberg Media Technologies GmbH, Audio Unit is a trademark of Apple, Inc."
         END

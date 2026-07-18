@@ -845,6 +845,17 @@ public:
     const auto aboutArea = bottomArea.GetFromRight(halfWidth).GetFromTop(5 * lineHeight);
     AddNamedChildControl(new ModelInfoControl(modelInfoArea, leftStyle), mControlNames.modelInfo);
     AddNamedChildControl(new AboutControl(aboutArea, leftStyle, leftText), mControlNames.about);
+    // Leftover space below Model Information: it only fills 2 of the 4 lineHeight-sized
+    // slots it's allocated (see ModelInfoControl::OnAttached -- the calibration-level slots
+    // are commented out), leaving 2 blank rows unused. Sibling control, not a child of
+    // ModelInfoControl, so it stays visible even when ModelInfoControl hides itself (it
+    // only shows once a model with info is loaded).
+    // This sits in modelInfoArea's own last row (its own bottommost, unused 4th slot),
+    // one row above where it was originally placed (which was past modelInfoArea's bottom
+    // edge entirely, close enough to the panel's rounded corner to get visually clipped).
+    const auto parametricCreditArea =
+      bottomArea.GetFromLeft(halfWidth).GetFromTop(4 * lineHeight).GetFromBottom(lineHeight);
+    AddChildControl(new IVLabelControl(parametricCreditArea, "Parametric Model Support By Gene Ko", leftStyle));
 
     auto closeAction = [&](IControl* pCaller) {
       static_cast<NAMSettingsPageControl*>(pCaller->GetParent())->HideAnimated(true);
