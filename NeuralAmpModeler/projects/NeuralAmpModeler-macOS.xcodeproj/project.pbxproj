@@ -454,13 +454,21 @@
 		AA7C86022B439AC000B5FB3A /* heapbuf.h in Headers */ = {isa = PBXBuildFile; fileRef = AA7C85F82B439AC000B5FB3A /* heapbuf.h */; };
 		AAB7BBB72CC4B8C6000B8B6E /* get_dsp.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB7BBB62CC4B8C6000B8B6E /* get_dsp.h */; };
 		AAB7E0122CC4B8C6000B8B6E /* container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB7E0102CC4B8C6000B8B6E /* container.cpp */; };
+		6EC2A3D772644AAA8A884809 /* linear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E944F549CC0418CA4491B4C /* linear.cpp */; };
 		AAB7E0132CC4B8C6000B8B6E /* container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB7E0102CC4B8C6000B8B6E /* container.cpp */; };
+		CAE323537DCE4A76AE396052 /* linear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E944F549CC0418CA4491B4C /* linear.cpp */; };
 		AAB7E0142CC4B8C6000B8B6E /* container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB7E0102CC4B8C6000B8B6E /* container.cpp */; };
+		1E5C8D576DD94A179BE42F6C /* linear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E944F549CC0418CA4491B4C /* linear.cpp */; };
 		AAB7E0152CC4B8C6000B8B6E /* container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB7E0102CC4B8C6000B8B6E /* container.cpp */; };
+		7E665EB2C278472885632D6A /* linear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E944F549CC0418CA4491B4C /* linear.cpp */; };
 		AAB7E0162CC4B8C6000B8B6E /* container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB7E0102CC4B8C6000B8B6E /* container.cpp */; };
+		BC7B72B5622B4CAFA8BE623A /* linear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E944F549CC0418CA4491B4C /* linear.cpp */; };
 		AAB7E0172CC4B8C6000B8B6E /* container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB7E0102CC4B8C6000B8B6E /* container.cpp */; };
+		2866AB6B4F1B46FFA68B0B90 /* linear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E944F549CC0418CA4491B4C /* linear.cpp */; };
 		AAB7E0182CC4B8C6000B8B6E /* container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB7E0102CC4B8C6000B8B6E /* container.cpp */; };
+		3CBCC3B920BA4049BFE34977 /* linear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E944F549CC0418CA4491B4C /* linear.cpp */; };
 		AAB7E0192CC4B8C6000B8B6E /* container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB7E0102CC4B8C6000B8B6E /* container.cpp */; };
+		DEC60EE4F1C548BBAEAFDB46 /* linear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E944F549CC0418CA4491B4C /* linear.cpp */; };
 		B1D2F7012D0000020027AB66 /* wavenet/slimmable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1D2F7002D0000010027AB66 /* wavenet/slimmable.cpp */; };
 		B1D2F7032D0000020027AB66 /* wavenet/slimmable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1D2F7002D0000010027AB66 /* wavenet/slimmable.cpp */; };
 		B1D2F7042D0000020027AB66 /* wavenet/slimmable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1D2F7002D0000010027AB66 /* wavenet/slimmable.cpp */; };
@@ -473,13 +481,21 @@
 		B8E22A0C220268C4007CBF4C /* IPlugVST3_ProcessorBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8E22A0A220268C4007CBF4C /* IPlugVST3_ProcessorBase.cpp */; };
 		B8E22A0D220268C4007CBF4C /* IPlugVST3_ProcessorBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8E22A0A220268C4007CBF4C /* IPlugVST3_ProcessorBase.cpp */; };
 		C2A2FAE112D0000120027AB66 /* wavenet/a2_fast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2A2FAE012D0000110027AB66 /* wavenet/a2_fast.cpp */; };
+		4315B76D342D454FBBED5640 /* wavenet/parametric_wavenet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95FE0C98B81F41CB867E647F /* wavenet/parametric_wavenet.cpp */; };
 		C2A2FAE122D0000120027AB66 /* wavenet/a2_fast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2A2FAE012D0000110027AB66 /* wavenet/a2_fast.cpp */; };
+		65AEACC0F0B941238BCB6044 /* wavenet/parametric_wavenet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95FE0C98B81F41CB867E647F /* wavenet/parametric_wavenet.cpp */; };
 		C2A2FAE132D0000120027AB66 /* wavenet/a2_fast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2A2FAE012D0000110027AB66 /* wavenet/a2_fast.cpp */; };
+		9A72158B0BA045DA826FBA52 /* wavenet/parametric_wavenet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95FE0C98B81F41CB867E647F /* wavenet/parametric_wavenet.cpp */; };
 		C2A2FAE142D0000120027AB66 /* wavenet/a2_fast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2A2FAE012D0000110027AB66 /* wavenet/a2_fast.cpp */; };
+		40CF1C98A23745559F20908E /* wavenet/parametric_wavenet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95FE0C98B81F41CB867E647F /* wavenet/parametric_wavenet.cpp */; };
 		C2A2FAE152D0000120027AB66 /* wavenet/a2_fast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2A2FAE012D0000110027AB66 /* wavenet/a2_fast.cpp */; };
+		46758A91F67E490FB143A044 /* wavenet/parametric_wavenet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95FE0C98B81F41CB867E647F /* wavenet/parametric_wavenet.cpp */; };
 		C2A2FAE162D0000120027AB66 /* wavenet/a2_fast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2A2FAE012D0000110027AB66 /* wavenet/a2_fast.cpp */; };
+		AF79D84F75D540BEB787043F /* wavenet/parametric_wavenet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95FE0C98B81F41CB867E647F /* wavenet/parametric_wavenet.cpp */; };
 		C2A2FAE172D0000120027AB66 /* wavenet/a2_fast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2A2FAE012D0000110027AB66 /* wavenet/a2_fast.cpp */; };
+		B61F1AEDA0E8496CB023936C /* wavenet/parametric_wavenet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95FE0C98B81F41CB867E647F /* wavenet/parametric_wavenet.cpp */; };
 		C2A2FAE182D0000120027AB66 /* wavenet/a2_fast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2A2FAE012D0000110027AB66 /* wavenet/a2_fast.cpp */; };
+		BCDBFCCF080646D19E7213FE /* wavenet/parametric_wavenet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95FE0C98B81F41CB867E647F /* wavenet/parametric_wavenet.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -649,8 +665,8 @@
 		4F1A528A205D916F00CF2908 /* IPlugAU.cpp */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.cpp.cpp; name = IPlugAU.cpp; path = ../../iPlug2/IPlug/AUv2/IPlugAU.cpp; sourceTree = "<group>"; tabWidth = 2; };
 		4F1B4AE32014D33600BC64D4 /* NeuralAmpModeler-macOS-MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "NeuralAmpModeler-macOS-MainMenu.xib"; path = "../resources/NeuralAmpModeler-macOS-MainMenu.xib"; sourceTree = "<group>"; };
 		4F1F1BE9135B1F60003A5BB2 /* wdlendian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wdlendian.h; path = ../../iPlug2/WDL/wdlendian.h; sourceTree = SOURCE_ROOT; };
-		4F23BA1313B647E50097A67E /* NeuralAmpModeler-AU-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "NeuralAmpModeler-AU-Info.plist"; path = "../resources/NeuralAmpModeler-AU-Info.plist"; sourceTree = "<group>"; };
-		4F23BA1413B647E50097A67E /* NeuralAmpModeler-macOS-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "NeuralAmpModeler-macOS-Info.plist"; path = "../resources/NeuralAmpModeler-macOS-Info.plist"; sourceTree = "<group>"; };
+		4F23BA1313B647E50097A67E /* AntiStatic-AU-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "AntiStatic-AU-Info.plist"; path = "../resources/AntiStatic-AU-Info.plist"; sourceTree = "<group>"; };
+		4F23BA1413B647E50097A67E /* AntiStatic-macOS-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "AntiStatic-macOS-Info.plist"; path = "../resources/AntiStatic-macOS-Info.plist"; sourceTree = "<group>"; };
 		4F2EA977203A50E9008E4850 /* IPlugAPP_dialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.cpp.cpp; name = IPlugAPP_dialog.cpp; path = ../../iPlug2/IPlug/APP/IPlugAPP_dialog.cpp; sourceTree = "<group>"; tabWidth = 2; };
 		4F2FB13A2A0047420027AB66 /* Resample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resample.h; sourceTree = "<group>"; };
 		4F2FB13B2A0047420027AB66 /* RecursiveLinearFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RecursiveLinearFilter.cpp; sourceTree = "<group>"; };
@@ -694,11 +710,11 @@
 		4F3907792013EC0400DDA490 /* BufferedAudioBus.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BufferedAudioBus.hpp; path = ../../iPlug2/IPlug/AUv3/BufferedAudioBus.hpp; sourceTree = "<group>"; };
 		4F39077A2013EC0400DDA490 /* IPlugAUAudioUnit.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = IPlugAUAudioUnit.mm; path = ../../iPlug2/IPlug/AUv3/IPlugAUAudioUnit.mm; sourceTree = "<group>"; };
 		4F39077B2013EC0400DDA490 /* IPlugAUAudioUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPlugAUAudioUnit.h; path = ../../iPlug2/IPlug/AUv3/IPlugAUAudioUnit.h; sourceTree = "<group>"; };
-		4F3907872013ED2F00DDA490 /* NeuralAmpModeler-macOS-AUv3-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "NeuralAmpModeler-macOS-AUv3-Info.plist"; path = "../resources/NeuralAmpModeler-macOS-AUv3-Info.plist"; sourceTree = "<group>"; };
+		4F3907872013ED2F00DDA490 /* AntiStatic-macOS-AUv3-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "AntiStatic-macOS-AUv3-Info.plist"; path = "../resources/AntiStatic-macOS-AUv3-Info.plist"; sourceTree = "<group>"; };
 		4F39A96F2051E53600739CAB /* processor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = processor.cpp; path = ../../iPlug2/Dependencies/IPlug/WAM_SDK/wamsdk/processor.cpp; sourceTree = "<group>"; };
 		4F39A9702051E53600739CAB /* processor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = processor.h; path = ../../iPlug2/Dependencies/IPlug/WAM_SDK/wamsdk/processor.h; sourceTree = "<group>"; };
 		4F3D2B4520212D4E00842FF4 /* wdl_base64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = wdl_base64.h; path = ../../iPlug2/WDL/wdl_base64.h; sourceTree = "<group>"; };
-		4F3E693A1409747300C4D749 /* NeuralAmpModeler-VST3-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "NeuralAmpModeler-VST3-Info.plist"; path = "../resources/NeuralAmpModeler-VST3-Info.plist"; sourceTree = "<group>"; };
+		4F3E693A1409747300C4D749 /* AntiStatic-VST3-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "AntiStatic-VST3-Info.plist"; path = "../resources/AntiStatic-VST3-Info.plist"; sourceTree = "<group>"; };
 		4F3EE1F0231438D000004786 /* NeuralAmpModeler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NeuralAmpModeler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F3EF92628DE6DF4002972F2 /* img */ = {isa = PBXFileReference; lastKnownFileType = folder; name = img; path = ../resources/img; sourceTree = "<group>"; };
 		4F3FB118202273A500622761 /* NeuralAmpModeler-macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "NeuralAmpModeler-macOS.entitlements"; sourceTree = "<group>"; };
@@ -706,7 +722,7 @@
 		4F4237231FC863060067D58C /* IPlugUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; name = IPlugUtilities.h; path = ../../iPlug2/IPlug/IPlugUtilities.h; sourceTree = "<group>"; tabWidth = 2; };
 		4F472105209B37A100A0A0A8 /* IPlugVST3_View.h */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.h; name = IPlugVST3_View.h; path = ../../iPlug2/IPlug/VST3/IPlugVST3_View.h; sourceTree = "<group>"; tabWidth = 2; };
 		4F4856812773BD16005BCF8E /* NeuralAmpModelerAUv3Appex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NeuralAmpModelerAUv3Appex.m; path = ../resources/NeuralAmpModelerAUv3Appex.m; sourceTree = "<group>"; };
-		4F4CC3811549B8A700A9EA21 /* NeuralAmpModeler-AAX-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "NeuralAmpModeler-AAX-Info.plist"; path = "../resources/NeuralAmpModeler-AAX-Info.plist"; sourceTree = "<group>"; };
+		4F4CC3811549B8A700A9EA21 /* AntiStatic-AAX-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "AntiStatic-AAX-Info.plist"; path = "../resources/AntiStatic-AAX-Info.plist"; sourceTree = "<group>"; };
 		4F4CC38A1549B91100A9EA21 /* AAX_Exports.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AAX_Exports.cpp; path = ../../iPlug2/Dependencies/IPlug/AAX_SDK/Interfaces/AAX_Exports.cpp; sourceTree = SOURCE_ROOT; };
 		4F4CC38C1549B92900A9EA21 /* AAXLibrary_common_debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = AAXLibrary_common_debug.xcconfig; path = ../../iPlug2/Dependencies/IPlug/AAX_SDK/Libs/AAXLibrary/MacBuild/AAXLibrary_common_debug.xcconfig; sourceTree = SOURCE_ROOT; };
 		4F4CC38D1549B92900A9EA21 /* AAXLibrary_common_release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = AAXLibrary_common_release.xcconfig; path = ../../iPlug2/Dependencies/IPlug/AAX_SDK/Libs/AAXLibrary/MacBuild/AAXLibrary_common_release.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -1040,11 +1056,13 @@
 		AA7C85F82B439AC000B5FB3A /* heapbuf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = heapbuf.h; sourceTree = "<group>"; };
 		AAB7BBB62CC4B8C6000B8B6E /* get_dsp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = get_dsp.h; sourceTree = "<group>"; };
 		AAB7E0102CC4B8C6000B8B6E /* container.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = container.cpp; sourceTree = "<group>"; };
+		0E944F549CC0418CA4491B4C /* linear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = linear.cpp; sourceTree = "<group>"; };
 		B1D2F7002D0000010027AB66 /* wavenet/slimmable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wavenet/slimmable.cpp; sourceTree = "<group>"; };
 		B8E22A0A220268C4007CBF4C /* IPlugVST3_ProcessorBase.cpp */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.cpp.cpp; name = IPlugVST3_ProcessorBase.cpp; path = ../../iPlug2/IPlug/VST3/IPlugVST3_ProcessorBase.cpp; sourceTree = "<group>"; tabWidth = 2; };
 		B8E22A0B220268C4007CBF4C /* IPlugVST3_ProcessorBase.h */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.h; name = IPlugVST3_ProcessorBase.h; path = ../../iPlug2/IPlug/VST3/IPlugVST3_ProcessorBase.h; sourceTree = "<group>"; tabWidth = 2; };
 		B8EA6B932203868500D23A86 /* IPlugVST3_Common.h */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.h; name = IPlugVST3_Common.h; path = ../../iPlug2/IPlug/VST3/IPlugVST3_Common.h; sourceTree = "<group>"; tabWidth = 2; };
 		C2A2FAE012D0000110027AB66 /* wavenet/a2_fast.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wavenet/a2_fast.cpp; sourceTree = "<group>"; };
+		95FE0C98B81F41CB867E647F /* wavenet/parametric_wavenet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wavenet/parametric_wavenet.cpp; sourceTree = "<group>"; };
 		C2A2FAE022D0000110027AB66 /* wavenet/a2_fast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wavenet/a2_fast.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1159,12 +1177,12 @@
 				4FDA1E102012CDB30027C868 /* resource.h */,
 				4F78BE1022E73DD900AD537E /* NeuralAmpModelerAU.h */,
 				4F4856812773BD16005BCF8E /* NeuralAmpModelerAUv3Appex.m */,
-				4F23BA1413B647E50097A67E /* NeuralAmpModeler-macOS-Info.plist */,
-				4F3907872013ED2F00DDA490 /* NeuralAmpModeler-macOS-AUv3-Info.plist */,
+				4F23BA1413B647E50097A67E /* AntiStatic-macOS-Info.plist */,
+				4F3907872013ED2F00DDA490 /* AntiStatic-macOS-AUv3-Info.plist */,
 				4F78BE1122E73DD900AD537E /* NeuralAmpModeler-macOS-AUv3Framework-Info.plist */,
-				4F3E693A1409747300C4D749 /* NeuralAmpModeler-VST3-Info.plist */,
-				4F23BA1313B647E50097A67E /* NeuralAmpModeler-AU-Info.plist */,
-				4F4CC3811549B8A700A9EA21 /* NeuralAmpModeler-AAX-Info.plist */,
+				4F3E693A1409747300C4D749 /* AntiStatic-VST3-Info.plist */,
+				4F23BA1313B647E50097A67E /* AntiStatic-AU-Info.plist */,
+				4F4CC3811549B8A700A9EA21 /* AntiStatic-AAX-Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1294,6 +1312,7 @@
 				4F2FB1512A0047420027AB66 /* activations.cpp */,
 				4F2FB1502A0047420027AB66 /* activations.h */,
 				AAB7E0102CC4B8C6000B8B6E /* container.cpp */,
+				0E944F549CC0418CA4491B4C /* linear.cpp */,
 				4F2FB14B2A0047420027AB66 /* convnet.cpp */,
 				4F2FB1492A0047420027AB66 /* convnet.h */,
 				4F2FB1562A0047420027AB67 /* conv1d.cpp */,
@@ -1311,6 +1330,7 @@
 				4F2FB1472A0047420027AB66 /* version.h */,
 				4F2FB1522A0047420027AB66 /* wavenet/model.cpp */,
 				C2A2FAE012D0000110027AB66 /* wavenet/a2_fast.cpp */,
+				95FE0C98B81F41CB867E647F /* wavenet/parametric_wavenet.cpp */,
 				C2A2FAE022D0000110027AB66 /* wavenet/a2_fast.h */,
 				B1D2F7002D0000010027AB66 /* wavenet/slimmable.cpp */,
 				4F2FB14C2A0047420027AB66 /* wavenet/model.h */,
@@ -2573,7 +2593,9 @@
 				4F2FB1C12A0047430027AB66 /* wavenet/model.cpp in Sources */,
 				B1D2F7072D0000020027AB66 /* wavenet/slimmable.cpp in Sources */,
 				C2A2FAE112D0000120027AB66 /* wavenet/a2_fast.cpp in Sources */,
+				4315B76D342D454FBBED5640 /* wavenet/parametric_wavenet.cpp in Sources */,
 				AAB7E0122CC4B8C6000B8B6E /* container.cpp in Sources */,
+				6EC2A3D772644AAA8A884809 /* linear.cpp in Sources */,
 				4F2FB1CF2A0047430027AB66 /* conv1d.cpp in Sources */,
 				4F2FB1D92A0047430027AB66 /* ring_buffer.cpp in Sources */,
 				4F2FB1662A0047430027AB66 /* dsp.cpp in Sources */,
@@ -2613,7 +2635,9 @@
 				4F2FB1BE2A0047430027AB66 /* wavenet/model.cpp in Sources */,
 				B1D2F7042D0000020027AB66 /* wavenet/slimmable.cpp in Sources */,
 				C2A2FAE122D0000120027AB66 /* wavenet/a2_fast.cpp in Sources */,
+				65AEACC0F0B941238BCB6044 /* wavenet/parametric_wavenet.cpp in Sources */,
 				AAB7E0132CC4B8C6000B8B6E /* container.cpp in Sources */,
+				CAE323537DCE4A76AE396052 /* linear.cpp in Sources */,
 				4F2FB1D02A0047430027AB66 /* conv1d.cpp in Sources */,
 				4F2FB1DA2A0047430027AB66 /* ring_buffer.cpp in Sources */,
 				4F8C10E320BA2796006320CD /* IGraphicsEditorDelegate.cpp in Sources */,
@@ -2656,7 +2680,9 @@
 				4F2FB1C32A0047430027AB66 /* wavenet/model.cpp in Sources */,
 				B1D2F7092D0000020027AB66 /* wavenet/slimmable.cpp in Sources */,
 				C2A2FAE132D0000120027AB66 /* wavenet/a2_fast.cpp in Sources */,
+				9A72158B0BA045DA826FBA52 /* wavenet/parametric_wavenet.cpp in Sources */,
 				AAB7E0142CC4B8C6000B8B6E /* container.cpp in Sources */,
+				1E5C8D576DD94A179BE42F6C /* linear.cpp in Sources */,
 				4F2FB1D12A0047430027AB66 /* conv1d.cpp in Sources */,
 				4F2FB1DB2A0047430027AB66 /* ring_buffer.cpp in Sources */,
 				4F3EE1D0231438D000004786 /* IGraphicsMac_view.mm in Sources */,
@@ -2725,7 +2751,9 @@
 				4F2FB1C22A0047430027AB66 /* wavenet/model.cpp in Sources */,
 				B1D2F7082D0000020027AB66 /* wavenet/slimmable.cpp in Sources */,
 				C2A2FAE142D0000120027AB66 /* wavenet/a2_fast.cpp in Sources */,
+				40CF1C98A23745559F20908E /* wavenet/parametric_wavenet.cpp in Sources */,
 				AAB7E0152CC4B8C6000B8B6E /* container.cpp in Sources */,
+				7E665EB2C278472885632D6A /* linear.cpp in Sources */,
 				4F2FB1D22A0047430027AB66 /* conv1d.cpp in Sources */,
 				4F2FB1DC2A0047430027AB66 /* ring_buffer.cpp in Sources */,
 				4F2FB1A32A0047430027AB66 /* convnet.cpp in Sources */,
@@ -2762,7 +2790,9 @@
 				4F2FB1BD2A0047430027AB66 /* wavenet/model.cpp in Sources */,
 				B1D2F7032D0000020027AB66 /* wavenet/slimmable.cpp in Sources */,
 				C2A2FAE152D0000120027AB66 /* wavenet/a2_fast.cpp in Sources */,
+				46758A91F67E490FB143A044 /* wavenet/parametric_wavenet.cpp in Sources */,
 				AAB7E0162CC4B8C6000B8B6E /* container.cpp in Sources */,
+				BC7B72B5622B4CAFA8BE623A /* linear.cpp in Sources */,
 				4F2FB1D32A0047430027AB66 /* conv1d.cpp in Sources */,
 				4F2FB1DD2A0047430027AB66 /* ring_buffer.cpp in Sources */,
 				4F815919205D50EB00393585 /* memorystream.cpp in Sources */,
@@ -2845,7 +2875,9 @@
 				4F2FB1BF2A0047430027AB66 /* wavenet/model.cpp in Sources */,
 				B1D2F7052D0000020027AB66 /* wavenet/slimmable.cpp in Sources */,
 				C2A2FAE162D0000120027AB66 /* wavenet/a2_fast.cpp in Sources */,
+				AF79D84F75D540BEB787043F /* wavenet/parametric_wavenet.cpp in Sources */,
 				AAB7E0172CC4B8C6000B8B6E /* container.cpp in Sources */,
+				2866AB6B4F1B46FFA68B0B90 /* linear.cpp in Sources */,
 				4F2FB1D42A0047430027AB66 /* conv1d.cpp in Sources */,
 				4F2FB1DE2A0047430027AB66 /* ring_buffer.cpp in Sources */,
 				4F2FB1A02A0047430027AB66 /* convnet.cpp in Sources */,
@@ -2904,7 +2936,9 @@
 				4F2FB1BB2A0047430027AB66 /* wavenet/model.cpp in Sources */,
 				B1D2F7012D0000020027AB66 /* wavenet/slimmable.cpp in Sources */,
 				C2A2FAE172D0000120027AB66 /* wavenet/a2_fast.cpp in Sources */,
+				B61F1AEDA0E8496CB023936C /* wavenet/parametric_wavenet.cpp in Sources */,
 				AAB7E0182CC4B8C6000B8B6E /* container.cpp in Sources */,
+				3CBCC3B920BA4049BFE34977 /* linear.cpp in Sources */,
 				4F2FB1D52A0047430027AB66 /* conv1d.cpp in Sources */,
 				4F2FB1DF2A0047430027AB66 /* ring_buffer.cpp in Sources */,
 				4FB1F59120E4B011004157C8 /* IGraphicsMac_view.mm in Sources */,
@@ -2982,7 +3016,9 @@
 				4F2FB1C02A0047430027AB66 /* wavenet/model.cpp in Sources */,
 				B1D2F7062D0000020027AB66 /* wavenet/slimmable.cpp in Sources */,
 				C2A2FAE182D0000120027AB66 /* wavenet/a2_fast.cpp in Sources */,
+				BCDBFCCF080646D19E7213FE /* wavenet/parametric_wavenet.cpp in Sources */,
 				AAB7E0192CC4B8C6000B8B6E /* container.cpp in Sources */,
+				DEC60EE4F1C548BBAEAFDB46 /* linear.cpp in Sources */,
 				4F2FB1D62A0047430027AB66 /* conv1d.cpp in Sources */,
 				4F2FB1E02A0047430027AB66 /* ring_buffer.cpp in Sources */,
 				4FFBB91F20863B0E00DDD0E7 /* vstparameters.cpp in Sources */,
@@ -3269,7 +3305,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				IBC_FLATTEN_NIBS = NO;
-				INFOPLIST_FILE = "../resources/NeuralAmpModeler-macOS-AUv3-Info.plist";
+				INFOPLIST_FILE = "../resources/AntiStatic-macOS-AUv3-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -3317,7 +3353,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				IBC_FLATTEN_NIBS = NO;
-				INFOPLIST_FILE = "../resources/NeuralAmpModeler-macOS-AUv3-Info.plist";
+				INFOPLIST_FILE = "../resources/AntiStatic-macOS-AUv3-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -3363,7 +3399,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				IBC_FLATTEN_NIBS = NO;
-				INFOPLIST_FILE = "../resources/NeuralAmpModeler-macOS-AUv3-Info.plist";
+				INFOPLIST_FILE = "../resources/AntiStatic-macOS-AUv3-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -3396,7 +3432,7 @@
 					"$(AU_DEFS)",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "../resources/NeuralAmpModeler-AU-Info.plist";
+				INFOPLIST_FILE = "../resources/AntiStatic-AU-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MARKETING_VERSION = 0.5.7;
 				OTHER_LDFLAGS = (
@@ -3404,7 +3440,7 @@
 					"$(inherited)",
 				);
 				OTHER_REZFLAGS = "-d ppc_$ppc -d i386_$i386 -I /System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Versions/A/Headers -I $CA_SDK/AudioUnits/AUPublic/AUBase";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.StevenAtkinson.audiounit.${BINARY_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GeneKo.audiounit.${BINARY_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				REZ_SEARCH_PATHS = (
 					/System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Versions/A/Headers,
@@ -3430,7 +3466,7 @@
 					"$(AU_DEFS)",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "../resources/NeuralAmpModeler-AU-Info.plist";
+				INFOPLIST_FILE = "../resources/AntiStatic-AU-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MARKETING_VERSION = 0.5.7;
 				OTHER_LDFLAGS = (
@@ -3438,7 +3474,7 @@
 					"$(inherited)",
 				);
 				OTHER_REZFLAGS = "-d ppc_$ppc -d i386_$i386 -I /System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Versions/A/Headers -I $CA_SDK/AudioUnits/AUPublic/AUBase";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.StevenAtkinson.audiounit.${BINARY_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GeneKo.audiounit.${BINARY_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				REZ_SEARCH_PATHS = (
 					/System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Versions/A/Headers,
@@ -3464,7 +3500,7 @@
 					"$(AU_DEFS)",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "../resources/NeuralAmpModeler-AU-Info.plist";
+				INFOPLIST_FILE = "../resources/AntiStatic-AU-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MARKETING_VERSION = 0.5.7;
 				OTHER_LDFLAGS = (
@@ -3472,7 +3508,7 @@
 					"$(inherited)",
 				);
 				OTHER_REZFLAGS = "-d ppc_$ppc -d i386_$i386 -I /System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Versions/A/Headers -I $CA_SDK/AudioUnits/AUPublic/AUBase";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.StevenAtkinson.audiounit.${BINARY_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GeneKo.audiounit.${BINARY_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				REZ_SEARCH_PATHS = (
 					/System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Versions/A/Headers,
@@ -3498,7 +3534,7 @@
 					"$(inherited)",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "$(SRCROOT)/../resources/NeuralAmpModeler-macOS-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/../resources/AntiStatic-macOS-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -3508,7 +3544,7 @@
 					"$(APP_FRAMEWORKS)",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.StevenAtkinson.app.${BINARY_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GeneKo.app.${BINARY_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
@@ -3532,7 +3568,7 @@
 					"$(inherited)",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "$(SRCROOT)/../resources/NeuralAmpModeler-macOS-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/../resources/AntiStatic-macOS-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -3542,7 +3578,7 @@
 					"$(APP_FRAMEWORKS)",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.StevenAtkinson.app.${BINARY_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GeneKo.app.${BINARY_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
@@ -3564,7 +3600,7 @@
 					"$(inherited)",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "$(SRCROOT)/../resources/NeuralAmpModeler-macOS-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/../resources/AntiStatic-macOS-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -3574,7 +3610,7 @@
 					"$(APP_FRAMEWORKS)",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.StevenAtkinson.app.${BINARY_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GeneKo.app.${BINARY_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
@@ -3813,10 +3849,10 @@
 					"$(inherited)",
 					"$(VST3_SDK)",
 				);
-				INFOPLIST_FILE = "../resources/NeuralAmpModeler-VST3-Info.plist";
+				INFOPLIST_FILE = "../resources/AntiStatic-VST3-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MARKETING_VERSION = 0.5.7;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.StevenAtkinson.vst3.${BINARY_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GeneKo.vst3.${BINARY_NAME}";
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = vst3;
 			};
@@ -3841,10 +3877,10 @@
 					"$(inherited)",
 					"$(VST3_SDK)",
 				);
-				INFOPLIST_FILE = "../resources/NeuralAmpModeler-VST3-Info.plist";
+				INFOPLIST_FILE = "../resources/AntiStatic-VST3-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MARKETING_VERSION = 0.5.7;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.StevenAtkinson.vst3.${BINARY_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GeneKo.vst3.${BINARY_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = vst3;
@@ -3868,10 +3904,10 @@
 					"$(inherited)",
 					"$(VST3_SDK)",
 				);
-				INFOPLIST_FILE = "../resources/NeuralAmpModeler-VST3-Info.plist";
+				INFOPLIST_FILE = "../resources/AntiStatic-VST3-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MARKETING_VERSION = 0.5.7;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.StevenAtkinson.vst3.${BINARY_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GeneKo.vst3.${BINARY_NAME}";
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = vst3;
 			};
@@ -3922,14 +3958,14 @@
 					"$(AAX_SDK)/Interfaces",
 					"$(AAX_SDK)/Interfaces/ACF",
 				);
-				INFOPLIST_FILE = "../resources/NeuralAmpModeler-AAX-Info.plist";
+				INFOPLIST_FILE = "../resources/AntiStatic-AAX-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(EXTRA_LIB_PATHS)",
 					"$(AAX_SDK)/Libs/Debug",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MARKETING_VERSION = 0.5.7;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.StevenAtkinson.aax.${BINARY_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GeneKo.aax.${BINARY_NAME}";
 				SDKROOT = "$(BASE_SDK_MAC)";
 				SKIP_INSTALL = NO;
 				SYMROOT = "../build-mac";
@@ -3991,7 +4027,7 @@
 					"$(AAX_SDK)/Interfaces",
 					"$(AAX_SDK)/Interfaces/ACF",
 				);
-				INFOPLIST_FILE = "../resources/NeuralAmpModeler-AAX-Info.plist";
+				INFOPLIST_FILE = "../resources/AntiStatic-AAX-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(EXTRA_LIB_PATHS)",
 					"$(AAX_SDK)/Libs/Release",
@@ -4006,7 +4042,7 @@
 					"-Xlinker",
 					1500,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.StevenAtkinson.aax.${BINARY_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GeneKo.aax.${BINARY_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = "$(BASE_SDK_MAC)";
 				SKIP_INSTALL = NO;
@@ -4067,7 +4103,7 @@
 					"$(AAX_SDK)/Interfaces",
 					"$(AAX_SDK)/Interfaces/ACF",
 				);
-				INFOPLIST_FILE = "../resources/NeuralAmpModeler-AAX-Info.plist";
+				INFOPLIST_FILE = "../resources/AntiStatic-AAX-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(EXTRA_LIB_PATHS)",
 					"$(AAX_SDK)/Libs/Release",
@@ -4082,7 +4118,7 @@
 					"-Xlinker",
 					1500,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.StevenAtkinson.aax.${BINARY_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GeneKo.aax.${BINARY_NAME}";
 				SDKROOT = "$(BASE_SDK_MAC)";
 				SKIP_INSTALL = NO;
 				SYMROOT = "../build-mac";
@@ -4216,7 +4252,7 @@
 					"$(inherited)",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "../resources/NeuralAmpModeler-macOS-Info.plist";
+				INFOPLIST_FILE = "../resources/AntiStatic-macOS-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -4226,7 +4262,7 @@
 					"$(APP_FRAMEWORKS)",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.StevenAtkinson.app.${BINARY_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GeneKo.app.${BINARY_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
@@ -4251,7 +4287,7 @@
 					"$(inherited)",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "../resources/NeuralAmpModeler-macOS-Info.plist";
+				INFOPLIST_FILE = "../resources/AntiStatic-macOS-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -4261,7 +4297,7 @@
 					"$(APP_FRAMEWORKS)",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.StevenAtkinson.app.${BINARY_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GeneKo.app.${BINARY_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
@@ -4286,7 +4322,7 @@
 					"$(inherited)",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "../resources/NeuralAmpModeler-macOS-Info.plist";
+				INFOPLIST_FILE = "../resources/AntiStatic-macOS-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -4296,7 +4332,7 @@
 					"$(APP_FRAMEWORKS)",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.StevenAtkinson.app.${BINARY_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GeneKo.app.${BINARY_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
@@ -4319,9 +4355,9 @@
 					"$(inherited)",
 					"$(VST3_SDK)",
 				);
-				INFOPLIST_FILE = "../resources/NeuralAmpModeler-VST3-Info.plist";
+				INFOPLIST_FILE = "../resources/AntiStatic-VST3-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.StevenAtkinson.vst3.${BINARY_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GeneKo.vst3.${BINARY_NAME}";
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = vst3;
 			};
@@ -4345,9 +4381,9 @@
 					"$(inherited)",
 					"$(VST3_SDK)",
 				);
-				INFOPLIST_FILE = "../resources/NeuralAmpModeler-VST3-Info.plist";
+				INFOPLIST_FILE = "../resources/AntiStatic-VST3-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.StevenAtkinson.vst3.${BINARY_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GeneKo.vst3.${BINARY_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = vst3;
@@ -4370,9 +4406,9 @@
 					"$(inherited)",
 					"$(VST3_SDK)",
 				);
-				INFOPLIST_FILE = "../resources/NeuralAmpModeler-VST3-Info.plist";
+				INFOPLIST_FILE = "../resources/AntiStatic-VST3-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.StevenAtkinson.vst3.${BINARY_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GeneKo.vst3.${BINARY_NAME}";
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = vst3;
 			};

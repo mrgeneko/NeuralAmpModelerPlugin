@@ -6,17 +6,17 @@
 	<array>
 		<dict>
 			<key>description</key>
-			<string>NeuralAmpModeler</string>
+			<string>Anti-Static</string>
 			<key>factoryFunction</key>
 			<string>NeuralAmpModeler_Factory</string>
 			<key>manufacturer</key>
-			<string>SDAa</string>
+			<string>GnKo</string>
 			<key>name</key>
-			<string>Steven Atkinson: NeuralAmpModeler</string>
+			<string>Gene Ko: Anti-Static</string>
 			<key>sandboxSafe</key>
 			<true/>
 			<key>subtype</key>
-			<string>1YEo</string>
+			<string>AntS</string>
 			<key>type</key>
 			<string>aufx</string>
 			<key>version</key>
@@ -28,21 +28,21 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>NeuralAmpModeler</string>
+	<string>AntiStatic</string>
 	<key>CFBundleGetInfoString</key>
-	<string>NeuralAmpModeler v0.7.15 Copyright 2022 Steven Atkinson</string>
+	<string>AntiStatic v0.7.15 Copyright 2026 Gene Ko</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.StevenAtkinson.audiounit.NeuralAmpModeler</string>
+	<string>com.GeneKo.audiounit.AntiStatic</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>NeuralAmpModeler</string>
+	<string>AntiStatic</string>
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>0.7.15</string>
 	<key>CFBundleSignature</key>
-	<string>1YEo</string>
+	<string>AntS</string>
 	<key>CFBundleVersion</key>
 	<string>0.7.15</string>
 	<key>CSResourcesFileMapped</key>
