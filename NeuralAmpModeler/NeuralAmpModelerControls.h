@@ -89,6 +89,31 @@ private:
   IActionFunction mDismiss;
 };
 
+// IBitmapControl (used by IGraphics::AttachBackground(), and previously by
+// NAMSettingsPageControl's own background) always draws its bitmap at the bitmap's native
+// pixel resolution, centred/positioned within the control's rect -- it never stretches. That's
+// fine as long as a bitmap's native size matches the window it's covering, but Background.jpg
+// is a fixed 600x400 asset; once the window grew taller than 400px for the parametric knob row,
+// the background stopped covering the full window, leaving a real gap where stale previously-
+// rendered pixels from other views persisted visibly. This stretches to fill whatever rect it's
+// given instead, matching how NAMFileBrowserControl and others already draw their own bitmaps.
+class NAMStretchedBitmapControl : public IControl
+{
+public:
+  NAMStretchedBitmapControl(const IRECT& bounds, const IBitmap& bitmap)
+  : IControl(bounds)
+  , mBitmap(bitmap)
+  {
+    mIgnoreMouse = true;
+  }
+
+  void Draw(IGraphics& g) override { g.DrawFittedBitmap(mBitmap, mRECT); }
+  void OnRescale() override { mBitmap = GetUI()->GetScaledBitmap(mBitmap); }
+
+private:
+  IBitmap mBitmap;
+};
+
 class NAMKnobControl : public IVKnobControl, public IBitmapBase
 {
 public:
@@ -799,7 +824,7 @@ public:
     const auto style = mStyle.WithDrawFrame(false).WithValueText(text);
     const IVStyle leftStyle = style.WithValueText(leftText);
 
-    AddNamedChildControl(new IBitmapControl(GetRECT(), mBitmap), mControlNames.bitmap)->SetIgnoreMouse(true);
+    AddNamedChildControl(new NAMStretchedBitmapControl(GetRECT(), mBitmap), mControlNames.bitmap);
     const auto titleArea = GetRECT().GetPadded(-(pad + 10.0f)).GetFromTop(50.0f);
     AddNamedChildControl(new IVLabelControl(titleArea, "SETTINGS", titleStyle), mControlNames.title);
 
@@ -839,7 +864,7 @@ public:
     }
 
     const float halfWidth = PLUG_WIDTH / 2.0f - pad;
-    const auto bottomArea = GetRECT().GetPadded(-pad).GetFromBottom(78.0f);
+    const auto bottomArea = GetRECT().GetPadded(-pad).GetFromBottom(78.0f).GetVShifted(-15.0f);
     const float lineHeight = 15.0f;
     const auto modelInfoArea = bottomArea.GetFromLeft(halfWidth).GetFromTop(4 * lineHeight);
     const auto aboutArea = bottomArea.GetFromRight(halfWidth).GetFromTop(5 * lineHeight);

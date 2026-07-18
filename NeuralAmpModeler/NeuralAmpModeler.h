@@ -84,8 +84,6 @@ enum ECtrlTags
   kCtrlTagSlimmableIcon,
   kCtrlTagSlimOverlayBackdrop,
   kCtrlTagSlimKnob,
-  kCtrlTagParametricIcon,
-  kCtrlTagParametricOverlayBackdrop,
   kCtrlTagParametricKnob0,
   kCtrlTagParametricKnob1,
   kCtrlTagParametricKnob2,
@@ -313,6 +311,12 @@ private:
 
   // Update all controls that depend on a model
   void _UpdateControlsFromModel();
+
+  // Geometry of the permanently-reserved parametric knob/switch row, shared between initial
+  // control creation and _UpdateControlsFromModel() (which repositions/resizes within it as
+  // models load) -- kept as one method rather than duplicated constants so the two can't
+  // drift out of sync.
+  iplug::igraphics::IRECT _GetParametricRowArea(iplug::igraphics::IGraphics* pGraphics) const;
 
   // Make sure that the latency is reported correctly.
   void _UpdateLatency();

@@ -28,7 +28,11 @@
 #define PLUG_DOES_STATE_CHUNKS 0
 #define PLUG_HAS_UI 1
 #define PLUG_WIDTH 600
-#define PLUG_HEIGHT 400
+// 400 (upstream) + 150 for a permanently-reserved row of parametric knobs/switches, shown
+// inline (below the Noise Gate/EQ toggles) instead of behind a click-to-reveal icon+overlay.
+// Empty for non-parametric models -- iPlug2 doesn't support runtime plugin-initiated window
+// resizing for AU or VST3, so this can't be conditional on what's loaded.
+#define PLUG_HEIGHT 550
 #define PLUG_FPS 60
 #define PLUG_SHARED_RESOURCES 0
 #define PLUG_HOST_RESIZE 0
@@ -69,7 +73,6 @@
 #define IR_ICON_OFF_FN "IRIconOff.svg"
 #define GLOBE_ICON_FN "Globe.svg"
 #define SLIMMABLE_ICON_FN "SlimmableIcon.svg"
-#define PARAMETRIC_ICON_FN "ParametricIcon.svg"
 
 #define BACKGROUND_FN "Background.jpg"
 #define BACKGROUND2X_FN "Background@2x.jpg"
