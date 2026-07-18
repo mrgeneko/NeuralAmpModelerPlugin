@@ -11,7 +11,7 @@ assignees: ''
 
 ## Before you make a new bug report:
 - [ ] Have you searched the Issues to see if your problem has already been reported? If it has, please follow that Issue instead of opening a duplicate!
-- [ ] Have you checked the [Rough edges](https://github.com/sdatkinson/NeuralAmpModelerPlugin/tree/main?tab=readme-ov-file#rough-edges) for help?
+- [ ] Have you checked the [Rough edges](https://github.com/mrgeneko/NeuralAmpModelerPlugin/tree/main?tab=readme-ov-file#rough-edges) for help?
 
 ## Description
 Provide a clear and concise description of what the bug is.

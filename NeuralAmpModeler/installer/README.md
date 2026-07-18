@@ -14,7 +14,7 @@ The Windows distribution script calls `scripts/update_installer-win.py`, which a
 - `INSTALLER_WELCOME_LABEL`
 - `INSTALLER_SETUP_WINDOW_TITLE`
 
-The macOS installer package identifiers default to `com.StevenAtkinson.*`. Set `INSTALLER_PKG_ID_PREFIX` to use your own reverse-DNS prefix, for example `com.example.myproduct`.
+The macOS installer package identifiers default to `com.GeneKo.*`. Set `INSTALLER_PKG_ID_PREFIX` to use your own reverse-DNS prefix, for example `com.example.myproduct`.
 
 `ThirdPartyNotices.txt` is installed with the standalone application and inside the VST3/AU bundle resources. Keep it current when adding, removing, or replacing dependencies. Private/product forks should update any source-availability language that points at this public repository.
 

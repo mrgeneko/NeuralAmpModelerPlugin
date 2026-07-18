@@ -7,15 +7,15 @@ Things might change--quickly--including these guidelines.
 If you're not sure about something or have a suggestion, reach out!
 
 ## Have an idea?
-If you have an idea that you'd like to see in the plugin, start by [raising an Issue](https://github.com/sdatkinson/NeuralAmpModelerPlugin/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=%5BFEATURE%5D) and describe what you'd like to see. 
+If you have an idea that you'd like to see in the plugin, start by [raising an Issue](https://github.com/mrgeneko/NeuralAmpModelerPlugin/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=%5BFEATURE%5D) and describe what you'd like to see. 
 This way, we can be sure that it's something that will fit in nicely with the plan before you start working.
 
 ## Working on Issues
-If you'd like to work on an [existing Issue](https://github.com/sdatkinson/NeuralAmpModelerPlugin/issues), then speak up in the issue's discussion thread.
+If you'd like to work on an [existing Issue](https://github.com/mrgeneko/NeuralAmpModelerPlugin/issues), then speak up in the issue's discussion thread.
 I would like to ask that you please try to give me a timeline for your work--I'd hate to have you duplicate work if I know that I'm going to e.g. get to it today and beat you to the punch.
 
 ## Testing
-This repo doesn't currently have unit tests (gasp! Sorry! If you want to help by proposing a framework, please [raise an Issue](https://github.com/sdatkinson/NeuralAmpModelerPlugin/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=%5BFEATURE%5D)!)
+This repo doesn't currently have unit tests (gasp! Sorry! If you want to help by proposing a framework, please [raise an Issue](https://github.com/mrgeneko/NeuralAmpModelerPlugin/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=%5BFEATURE%5D)!)
 However, there are a few things I'd appreciate if you did to make sure that everything is working as expected:
 - [ ] The standalone plugin builds.
 - [ ] The plugin runs.
