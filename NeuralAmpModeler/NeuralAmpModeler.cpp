@@ -2,6 +2,7 @@
 #include <cmath> // pow
 #include <filesystem>
 #include <iostream>
+#include <string> // std::to_string
 #include <utility>
 
 #include "Colors.h"
@@ -94,6 +95,14 @@ NeuralAmpModeler::NeuralAmpModeler(const InstanceInfo& info)
   GetParam(kInputCalibrationLevel)
     ->InitDouble(kInputCalibrationLevelParamName.c_str(), kDefaultInputCalibrationLevel, -60.0, 60.0, 0.1, "dBu");
   GetParam(kSlim)->InitDouble("Slim", 0.0, 0.0, 1.0, 0.01);
+  // Placeholder ranges for the parametric knob slots. These get reconfigured (name/range/
+  // default) from the loaded model's own GetParameterDefs() in _UpdateControlsFromModel();
+  // these initial values only matter until a parametric model is first loaded.
+  for (int i = 0; i < kNumParametricKnobs; i++)
+  {
+    const std::string name = "Param" + std::to_string(i + 1);
+    GetParam(kParametricKnob0 + i)->InitDouble(name.c_str(), 0.5, 0.0, 1.0, 0.001);
+  }
 
   mNoiseGateTrigger.AddListener(&mNoiseGateGain);
 
@@ -128,6 +137,7 @@ NeuralAmpModeler::NeuralAmpModeler(const InstanceInfo& info)
     const auto irIconOnSVG = pGraphics->LoadSVG(IR_ICON_ON_FN);
     const auto irIconOffSVG = pGraphics->LoadSVG(IR_ICON_OFF_FN);
     const auto slimIconSVG = pGraphics->LoadSVG(SLIMMABLE_ICON_FN);
+    const auto parametricIconSVG = pGraphics->LoadSVG(PARAMETRIC_ICON_FN);
 
     const auto backgroundBitmap = pGraphics->LoadBitmap(BACKGROUND_FN);
     const auto fileBackgroundBitmap = pGraphics->LoadBitmap(FILEBACKGROUND_FN);
@@ -170,6 +180,12 @@ NeuralAmpModeler::NeuralAmpModeler(const InstanceInfo& info)
       contentArea.GetFromBottom((2.0f * fileHeight)).GetFromTop(fileHeight).GetMidHPadded(fileWidth).GetVShifted(-1);
     const auto slimIconArea =
       IRECT(modelArea.R + 6.f, modelArea.MH() - 14.f, modelArea.R + 6.f + 2.f * 28.f, modelArea.MH() + 14.f);
+    // Stacked directly below the Slim icon, aligned with the IR row (there isn't enough
+    // horizontal room to its right within the plugin window -- modelArea alone is 400px wide
+    // and the Slim icon already uses up the ~56px margin between it and the window edge).
+    // Same X range as slimIconArea, so both icons can be visible at once (e.g. a model that is
+    // both parametric AND slimmable) without overlapping.
+    const auto parametricIconArea = slimIconArea.GetVShifted(irYOffset);
     const auto modelIconArea = modelArea.GetFromLeft(30).GetTranslated(-40, 10);
     const auto irArea = modelArea.GetVShifted(irYOffset);
     const auto irSwitchArea = irArea.GetFromLeft(30.0f).GetHShifted(-40.0f).GetScaledAboutCentre(0.6f);
@@ -258,6 +274,37 @@ NeuralAmpModeler::NeuralAmpModeler(const InstanceInfo& info)
       ->SetAnimationEndActionFunction(showSlimOverlay)
       ->Hide(true);
 
+    // Parametric knob overlay (mirrors the Slim overlay above, but for up to kNumParametricKnobs
+    // model-driven knobs). hideParametricOverlay is stateless (always hides everything), but
+    // showParametricOverlay captures `this` so it can only reveal the knob slots that are
+    // actually eligible for the currently-loaded model (i < mModel->GetNumParams()) -- the
+    // ineligible slots must stay hidden even while the panel is open.
+    auto hideParametricOverlay = [](IControl* pCaller) {
+      IGraphics* ui = pCaller->GetUI();
+      if (auto* backdrop = ui->GetControlWithTag(kCtrlTagParametricOverlayBackdrop))
+        backdrop->Hide(true);
+      for (int i = 0; i < kNumParametricKnobs; i++)
+        if (auto* knob = ui->GetControlWithTag(kCtrlTagParametricKnob0 + i))
+          knob->Hide(true);
+      ui->SetAllControlsDirty();
+    };
+    auto showParametricOverlay = [this](IControl* pCaller) {
+      IGraphics* ui = pCaller->GetUI();
+      if (auto* backdrop = ui->GetControlWithTag(kCtrlTagParametricOverlayBackdrop))
+        backdrop->Hide(false);
+      const int numParams = mModel ? mModel->GetNumParams() : 0;
+      for (int i = 0; i < kNumParametricKnobs; i++)
+        if (auto* knob = ui->GetControlWithTag(kCtrlTagParametricKnob0 + i))
+          knob->Hide(i >= numParams);
+      ui->SetAllControlsDirty();
+    };
+
+    pGraphics
+      ->AttachControl(new NAMSquareButtonControl(parametricIconArea, DefaultClickActionFunc, parametricIconSVG),
+                      kCtrlTagParametricIcon)
+      ->SetAnimationEndActionFunction(showParametricOverlay)
+      ->Hide(true);
+
     pGraphics->AttachControl(new ISVGSwitchControl(irSwitchArea, {irIconOffSVG, irIconOnSVG}, kIRToggle));
     pGraphics->AttachControl(
       new NAMFileBrowserControl(irArea, kMsgTagClearIR, defaultIRString.c_str(), "wav", loadIRCompletionHandler, style,
@@ -303,6 +350,25 @@ NeuralAmpModeler::NeuralAmpModeler(const InstanceInfo& info)
     pGraphics
       ->AttachControl(new NAMKnobControl(slimKnobArea, kSlim, "Slim", style, knobBackgroundBitmap), kCtrlTagSlimKnob)
       ->Hide(true);
+
+    // Parametric knob panel: a row of up to kNumParametricKnobs knobs, centred on the whole
+    // plugin window like the Slim knob above. NAMSlimOverlayBackdropControl is a generic
+    // dim-and-dismiss-on-click layer (nothing Slim-specific about its behavior), so it's reused
+    // directly here rather than writing an analogous new backdrop class.
+    constexpr float parametricKnobWidth = 100.f;
+    const auto parametricPanelArea =
+      b.GetCentredInside(parametricKnobWidth * (float)kNumParametricKnobs, NAM_KNOB_HEIGHT + 24.f);
+    pGraphics
+      ->AttachControl(new NAMSlimOverlayBackdropControl(b, hideParametricOverlay), kCtrlTagParametricOverlayBackdrop)
+      ->Hide(true);
+    for (int i = 0; i < kNumParametricKnobs; i++)
+    {
+      const auto parametricKnobArea = parametricPanelArea.GetGridCell(0, i, 1, kNumParametricKnobs);
+      pGraphics
+        ->AttachControl(new NAMKnobControl(parametricKnobArea, kParametricKnob0 + i, "", style, knobBackgroundBitmap),
+                        kCtrlTagParametricKnob0 + i)
+        ->Hide(true);
+    }
 
     pGraphics->ForAllControlsFunc([](IControl* pControl) {
       pControl->SetMouseEventsWhenDisabled(true);
@@ -441,6 +507,13 @@ void NeuralAmpModeler::OnIdle()
         p->Hide(true);
       if (auto* p = pGraphics->GetControlWithTag(kCtrlTagSlimKnob))
         p->Hide(true);
+      if (auto* p = pGraphics->GetControlWithTag(kCtrlTagParametricIcon))
+        p->Hide(true);
+      if (auto* p = pGraphics->GetControlWithTag(kCtrlTagParametricOverlayBackdrop))
+        p->Hide(true);
+      for (int i = 0; i < kNumParametricKnobs; i++)
+        if (auto* p = pGraphics->GetControlWithTag(kCtrlTagParametricKnob0 + i))
+          p->Hide(true);
       pGraphics->SetAllControlsDirty();
       mModelCleared = false;
     }
@@ -522,6 +595,10 @@ void NeuralAmpModeler::OnParamChange(int paramIdx)
     case kToneMid: mToneStack->SetParam("middle", GetParam(paramIdx)->Value()); break;
     case kToneTreble: mToneStack->SetParam("treble", GetParam(paramIdx)->Value()); break;
     case kSlim: _ApplySlimParamToLoadedNAMs(); break;
+    case kParametricKnob0:
+    case kParametricKnob1:
+    case kParametricKnob2:
+    case kParametricKnob3: _ApplyParametricParamsToLoadedNAMs(); break;
     default: break;
   }
 }
@@ -737,6 +814,38 @@ void NeuralAmpModeler::_ApplySlimParamToLoadedNAMs()
       return;
     if (nam::SlimmableModel* s = p->GetSlimmableModel())
       s->SetSlimmableSize(v);
+  };
+  apply(mModel.get());
+  apply(mStagedModel.get());
+}
+
+void NeuralAmpModeler::_ApplyParametricParamsToLoadedNAMs()
+{
+  // IMPORTANT: SetKnobValues() must receive RAW, NATURAL-UNIT values (the same units as
+  // DSPParamDef::min_val/max_val/default_val), NOT a [0,1] normalized fraction -- the
+  // training side feeds the model's real declared parameter values as conditioning input,
+  // with no normalization step anywhere, not just the C++ inference side. A knob whose real
+  // range happens to be exactly [0,1] can't distinguish the two conventions, which is a
+  // trap -- a knob with a different real range (e.g. a 0-10 Gain) would silently get the
+  // wrong conditioning value if normalized here.
+  // GetParam(...)->Value() is already in natural units (the param was reconfigured to
+  // [min_val, max_val] in _UpdateControlsFromModel) -- pass it straight through.
+  double values_natural[kNumParametricKnobs];
+  for (int i = 0; i < kNumParametricKnobs; i++)
+  {
+    values_natural[i] = GetParam(kParametricKnob0 + i)->Value();
+  }
+  auto apply = [&values_natural](ResamplingNAM* p) {
+    if (p == nullptr)
+      return;
+    const int n = p->GetNumParams();
+    if (n <= 0)
+      return;
+    std::vector<float> values;
+    values.reserve(n);
+    for (int i = 0; i < n && i < kNumParametricKnobs; i++)
+      values.push_back(static_cast<float>(values_natural[i]));
+    p->SetKnobValues(values);
   };
   apply(mModel.get());
   apply(mStagedModel.get());
@@ -961,6 +1070,60 @@ void NeuralAmpModeler::_UpdateControlsFromModel()
       const bool show = mModel->GetSlimmableModel() != nullptr;
       pSlimIcon->Hide(!show);
     }
+
+    if (auto* pParametricIcon = pGraphics->GetControlWithTag(kCtrlTagParametricIcon))
+    {
+      const int numParams = mModel->GetNumParams();
+      const auto paramDefs = mModel->GetParameterDefs();
+      const int numDefs = static_cast<int>(paramDefs.size());
+      pParametricIcon->Hide(numParams <= 0);
+
+      // If the overlay panel happens to already be open (e.g. the user had it open when a new
+      // model finished loading), keep the still-eligible knobs visible instead of yanking the
+      // panel shut from under them. Ineligible slots (i >= numParams) are force-hidden below
+      // regardless of the overlay's open/closed state -- they must never be shown.
+      auto* pBackdrop = pGraphics->GetControlWithTag(kCtrlTagParametricOverlayBackdrop);
+      const bool overlayOpen = pBackdrop != nullptr && !pBackdrop->IsHidden();
+
+      for (int i = 0; i < kNumParametricKnobs; i++)
+      {
+        auto* pKnob = pGraphics->GetControlWithTag(kCtrlTagParametricKnob0 + i);
+        if (pKnob == nullptr)
+          continue;
+
+        const bool eligible = i < numParams && i < numDefs;
+        if (!eligible)
+        {
+          pKnob->Hide(true);
+          continue;
+        }
+
+        const auto& def = paramDefs[i];
+        const std::string label = def.name.empty() ? ("Param " + std::to_string(i + 1)) : def.name;
+        const double range = std::max(static_cast<double>(def.max_val - def.min_val), 1.0e-6);
+        const double step = std::max(range / 1000.0, 1.0e-4);
+        const int paramIdx = kParametricKnob0 + i;
+
+        // Reconfigure this slot's declared range/name/default from the model's own metadata.
+        GetParam(paramIdx)->InitDouble(label.c_str(), def.default_val, def.min_val, def.max_val, step);
+        if (auto* pKnobControl = pKnob->As<NAMKnobControl>())
+          pKnobControl->SetLabelStr(label.c_str());
+        // Push the (possibly just-reset) value to the knob control's visual position.
+        SendParameterValueFromDelegate(paramIdx, GetParam(paramIdx)->GetNormalized(), true);
+
+        pKnob->Hide(!overlayOpen);
+      }
+
+      if (numParams <= 0 && pBackdrop != nullptr)
+      {
+        // The new model isn't parametric (or has none of these slots); close the panel if it
+        // was left open from a previously-loaded parametric model.
+        pBackdrop->Hide(true);
+      }
+    }
+    // Push the (possibly just-reconfigured) knob values into the model. Harmless no-op if the
+    // model isn't parametric (GetNumParams() == 0 short-circuits inside).
+    _ApplyParametricParamsToLoadedNAMs();
   }
 }
 

@@ -47,10 +47,19 @@ enum EParams
   kInputCalibrationLevel,
   kOutputMode,
   kSlim,
+  // Up to 4 knob slots for parametric (knob-controllable) models. Slots beyond a given
+  // model's real GetNumParams() stay hidden; 4 is headroom above what trained parametric
+  // models have needed so far (2-3 knobs).
+  kParametricKnob0,
+  kParametricKnob1,
+  kParametricKnob2,
+  kParametricKnob3,
   kNumParams
 };
 
 const int numKnobs = 6;
+// Number of parametric knob slots (kParametricKnob0..kParametricKnob3).
+const int kNumParametricKnobs = 4;
 
 enum ECtrlTags
 {
@@ -65,6 +74,12 @@ enum ECtrlTags
   kCtrlTagSlimmableIcon,
   kCtrlTagSlimOverlayBackdrop,
   kCtrlTagSlimKnob,
+  kCtrlTagParametricIcon,
+  kCtrlTagParametricOverlayBackdrop,
+  kCtrlTagParametricKnob0,
+  kCtrlTagParametricKnob1,
+  kCtrlTagParametricKnob2,
+  kCtrlTagParametricKnob3,
   kNumCtrlTags
 };
 
@@ -178,6 +193,15 @@ public:
     return dynamic_cast<const nam::SlimmableModel*>(mEncapsulated.get());
   }
 
+  // Forward the polymorphic knob interface to the encapsulated model so that callers driving
+  // a ResamplingNAM* (rather than the concrete nam::DSP subclass) can reach genuinely
+  // parametric models. Without these overrides, ResamplingNAM would silently inherit
+  // nam::DSP's no-op defaults (SetKnobValues() doing nothing, GetNumParams() returning 0)
+  // even when mEncapsulated is a real parametric model.
+  void SetKnobValues(const std::vector<float>& values) override { mEncapsulated->SetKnobValues(values); }
+  int GetNumParams() const override { return mEncapsulated->GetNumParams(); }
+  std::vector<nam::DSPParamDef> GetParameterDefs() const override { return mEncapsulated->GetParameterDefs(); }
+
 private:
   bool NeedToResample() const { return GetExpectedSampleRate() != GetEncapsulatedSampleRate(); };
   // The encapsulated NAM
@@ -256,6 +280,10 @@ private:
   void _SetInputGain();
   void _SetOutputGain();
   void _ApplySlimParamToLoadedNAMs();
+  // Reads the current values of kParametricKnob0..kParametricKnob3 (normalized to [0,1]
+  // against each knob's currently-configured range) and applies them to mModel and
+  // mStagedModel via SetKnobValues(), truncated to each model's own GetNumParams().
+  void _ApplyParametricParamsToLoadedNAMs();
 
   // See: Unserialization.cpp
   void _UnserializeApplyConfig(nlohmann::json& config);
