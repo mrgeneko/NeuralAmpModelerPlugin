@@ -10,4 +10,4 @@
 [submodule "NeuralAmpModelerCore"]
 	path = NeuralAmpModelerCore
 	url = https://github.com/mrgeneko/NeuralAmpModelerCore.git
-	branch = chainsmith
+	branch = main
