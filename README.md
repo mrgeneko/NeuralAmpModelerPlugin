@@ -1,20 +1,22 @@
-# Neural Amp Modeler Plug-in
+# Anti-Static (Neural Amp Modeler Plug-in fork)
 
-[![Build](https://github.com/sdatkinson/NeuralAmpModelerPlugin/actions/workflows/build-native.yml/badge.svg)](https://github.com/sdatkinson/NeuralAmpModelerPlugin/actions/workflows/build-native.yml)
+[![Build](https://github.com/mrgeneko/NeuralAmpModelerPlugin/actions/workflows/build-native.yml/badge.svg)](https://github.com/mrgeneko/NeuralAmpModelerPlugin/actions/workflows/build-native.yml)
 
 A VST3/AudioUnit plug-in\* for [Neural Amp Modeler](https://github.com/sdatkinson/neural-amp-modeler), built with [iPlug2](https://iplug2.github.io).
+
+This is a fork of [sdatkinson/NeuralAmpModelerPlugin](https://github.com/sdatkinson/NeuralAmpModelerPlugin), rebranded "Anti-Static" and built against [mrgeneko/NeuralAmpModelerCore](https://github.com/mrgeneko/NeuralAmpModelerCore) (see that repo's own README for the fork's DSP-side additions -- parametric/knob-controllable models, slimmable models, etc.). On top of that, this repo adds:
+- A settings-page overlay exposing a loaded parametric model's own knobs/switches directly in the UI -- continuous knobs, or for discrete parameters, a segmented switch -- sized and laid out to fit however many the model actually declares (up to 12).
+- A generic host parameter list (e.g. a DAW's "Controls" view) that reflects a loaded model's real per-parameter names instead of placeholders.
+
+No pre-built installers are published for this fork -- build it yourself from source (see below).
 
 - https://www.youtube.com/user/RunawayThumbtack
 - https://github.com/sdatkinson/neural-amp-modeler
 
 ## Building and Installation
 
-To build the app or plugin, there are build scripts in [NeuralAmpModeler/scripts/](https://github.com/sdatkinson/NeuralAmpModelerPlugin/tree/main/NeuralAmpModeler/scripts).
-The [workflows](https://github.com/sdatkinson/NeuralAmpModelerPlugin/tree/main/.github/workflows) can show you how to do this.
-
-### Pre-built installers
-
-If you want a pre-built installer from this repo without having to , I've made "Gateway", a fork of this repo, availble at https://neuralampmodeler.com/users!
+To build the app or plugin, there are build scripts in [NeuralAmpModeler/scripts/](https://github.com/mrgeneko/NeuralAmpModelerPlugin/tree/main/NeuralAmpModeler/scripts).
+The [workflows](https://github.com/mrgeneko/NeuralAmpModelerPlugin/tree/main/.github/workflows) can show you how to do this.
 
 ## Supported Platforms
 
