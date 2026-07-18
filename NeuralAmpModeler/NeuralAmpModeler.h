@@ -47,19 +47,29 @@ enum EParams
   kInputCalibrationLevel,
   kOutputMode,
   kSlim,
-  // Up to 4 knob slots for parametric (knob-controllable) models. Slots beyond a given
-  // model's real GetNumParams() stay hidden; 4 is headroom above what trained parametric
-  // models have needed so far (2-3 knobs).
+  // Up to kNumParametricKnobs slots for parametric (knob-controllable) models. Slots beyond
+  // a given model's real GetNumParams() stay hidden. 12 sits below the DSP core's absolute
+  // ceiling (ParametricWaveNet::kMaxParams == 16) while comfortably covering realistic circuits
+  // (most have 2-4 knobs); the panel shrinks knob width as active count grows past what fits at
+  // full size in one row, then wraps to additional rows once shrinking alone can't fit them all.
   kParametricKnob0,
   kParametricKnob1,
   kParametricKnob2,
   kParametricKnob3,
+  kParametricKnob4,
+  kParametricKnob5,
+  kParametricKnob6,
+  kParametricKnob7,
+  kParametricKnob8,
+  kParametricKnob9,
+  kParametricKnob10,
+  kParametricKnob11,
   kNumParams
 };
 
 const int numKnobs = 6;
-// Number of parametric knob slots (kParametricKnob0..kParametricKnob3).
-const int kNumParametricKnobs = 4;
+// Number of parametric knob slots (kParametricKnob0..kParametricKnob11).
+const int kNumParametricKnobs = 12;
 
 enum ECtrlTags
 {
@@ -80,6 +90,14 @@ enum ECtrlTags
   kCtrlTagParametricKnob1,
   kCtrlTagParametricKnob2,
   kCtrlTagParametricKnob3,
+  kCtrlTagParametricKnob4,
+  kCtrlTagParametricKnob5,
+  kCtrlTagParametricKnob6,
+  kCtrlTagParametricKnob7,
+  kCtrlTagParametricKnob8,
+  kCtrlTagParametricKnob9,
+  kCtrlTagParametricKnob10,
+  kCtrlTagParametricKnob11,
   kNumCtrlTags
 };
 

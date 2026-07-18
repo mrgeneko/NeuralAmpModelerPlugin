@@ -598,7 +598,15 @@ void NeuralAmpModeler::OnParamChange(int paramIdx)
     case kParametricKnob0:
     case kParametricKnob1:
     case kParametricKnob2:
-    case kParametricKnob3: _ApplyParametricParamsToLoadedNAMs(); break;
+    case kParametricKnob3:
+    case kParametricKnob4:
+    case kParametricKnob5:
+    case kParametricKnob6:
+    case kParametricKnob7:
+    case kParametricKnob8:
+    case kParametricKnob9:
+    case kParametricKnob10:
+    case kParametricKnob11: _ApplyParametricParamsToLoadedNAMs(); break;
     default: break;
   }
 }
@@ -1085,6 +1093,36 @@ void NeuralAmpModeler::_UpdateControlsFromModel()
       auto* pBackdrop = pGraphics->GetControlWithTag(kCtrlTagParametricOverlayBackdrop);
       const bool overlayOpen = pBackdrop != nullptr && !pBackdrop->IsHidden();
 
+      // Lay out however many knobs this model actually uses (<= kNumParametricKnobs) in the
+      // fixed-size window: shrink knob width first as the count grows past what fits at full
+      // size in one row, then wrap to more rows once shrinking alone can't fit them all at a
+      // usable minimum width. Recomputed here (not once at control-creation time) because the
+      // active count depends on whichever model is currently loaded.
+      const int numActive = std::min({numParams, numDefs, kNumParametricKnobs});
+      constexpr float kKnobMaxW = 100.f;
+      constexpr float kKnobMinW = 70.f;
+      constexpr float kPanelMarginX = 20.f;
+      const IRECT windowBounds = pGraphics->GetBounds();
+      const float maxPanelW = windowBounds.W() - 2.f * kPanelMarginX;
+
+      int rows = 1;
+      int cols = std::max(numActive, 1);
+      if (numActive > 0)
+      {
+        while (rows < numActive)
+        {
+          cols = (numActive + rows - 1) / rows; // ceil(numActive / rows)
+          const float knobW = std::min(kKnobMaxW, maxPanelW / (float)cols);
+          if (knobW >= kKnobMinW)
+            break;
+          rows++;
+        }
+        cols = (numActive + rows - 1) / rows;
+      }
+      const float knobW = numActive > 0 ? std::min(kKnobMaxW, maxPanelW / (float)cols) : kKnobMaxW;
+      const float rowH = NAM_KNOB_HEIGHT + 24.f;
+      const auto parametricPanelArea = windowBounds.GetCentredInside(knobW * (float)cols, rowH * (float)rows);
+
       for (int i = 0; i < kNumParametricKnobs; i++)
       {
         auto* pKnob = pGraphics->GetControlWithTag(kCtrlTagParametricKnob0 + i);
@@ -1107,7 +1145,10 @@ void NeuralAmpModeler::_UpdateControlsFromModel()
         // Reconfigure this slot's declared range/name/default from the model's own metadata.
         GetParam(paramIdx)->InitDouble(label.c_str(), def.default_val, def.min_val, def.max_val, step);
         if (auto* pKnobControl = pKnob->As<NAMKnobControl>())
+        {
           pKnobControl->SetLabelStr(label.c_str());
+          pKnobControl->SetTargetAndDrawRECTs(parametricPanelArea.GetGridCell(i / cols, i % cols, rows, cols));
+        }
         // Push the (possibly just-reset) value to the knob control's visual position.
         SendParameterValueFromDelegate(paramIdx, GetParam(paramIdx)->GetNormalized(), true);
 
