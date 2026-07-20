@@ -46,21 +46,18 @@ def main():
         "AppName": display_name,
         "AppContact": env_or_default(
             "INSTALLER_APP_CONTACT",
-            "neuralampmodeler@gmail.com",
+            "murgencoapps@gmail.com",
         ),
         "AppCopyright": env_or_default(
             "INSTALLER_APP_COPYRIGHT",
             "Copyright (C) 2022 Steven Atkinson",
         ),
         "AppPublisher": env_or_default("INSTALLER_APP_PUBLISHER", "Gene Ko"),
-        "AppPublisherURL": env_or_default(
-            "INSTALLER_APP_PUBLISHER_URL",
-            "https://www.neuralampmodeler.com/",
-        ),
-        "AppSupportURL": env_or_default(
-            "INSTALLER_APP_SUPPORT_URL",
-            "https://www.neuralampmodeler.com/",
-        ),
+        # No AppPublisherURL/AppSupportURL: this fork has no site of its own, and
+        # the upstream URLs sent Anti-Static users to a different project for
+        # support. Inno Setup treats both as optional. These are rewritten only
+        # for keys already present in the .iss, so dropping them here and there
+        # keeps them out rather than reintroducing a stale default.
         "AppVersion": config["FULL_VER_STR"],
         "VersionInfoVersion": config["FULL_VER_STR"],
         "DefaultDirName": "{pf}\\" + display_name,

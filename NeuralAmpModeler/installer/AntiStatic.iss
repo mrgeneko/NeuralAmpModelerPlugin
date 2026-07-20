@@ -1,10 +1,8 @@
 [Setup]
 AppName=AntiStatic
-AppContact=neuralampmodeler@gmail.com
+AppContact=murgencoapps@gmail.com
 AppCopyright=Copyright (C) 2022 Steven Atkinson
 AppPublisher=Gene Ko
-AppPublisherURL=https://www.neuralampmodeler.com/
-AppSupportURL=https://www.neuralampmodeler.com/
 AppVersion=0.8.0
 VersionInfoVersion=0.8.0
 DefaultDirName={pf}\AntiStatic
