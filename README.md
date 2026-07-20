@@ -8,15 +8,34 @@ This is a fork of [sdatkinson/NeuralAmpModelerPlugin](https://github.com/sdatkin
 - A settings-page overlay exposing a loaded parametric model's own knobs/switches directly in the UI -- continuous knobs, or for discrete parameters, a segmented switch -- sized and laid out to fit however many the model actually declares (up to 12).
 - A generic host parameter list (e.g. a DAW's "Controls" view) that reflects a loaded model's real per-parameter names instead of placeholders.
 
-No pre-built installers are published for this fork -- build it yourself from source (see below).
-
 - https://www.youtube.com/user/RunawayThumbtack
 - https://github.com/sdatkinson/neural-amp-modeler
 
-## Building and Installation
+## Installing
 
-To build the app or plugin, there are build scripts in [NeuralAmpModeler/scripts/](https://github.com/mrgeneko/NeuralAmpModelerPlugin/tree/main/NeuralAmpModeler/scripts).
-The [workflows](https://github.com/mrgeneko/NeuralAmpModelerPlugin/tree/main/.github/workflows) can show you how to do this.
+Builds are on the [Releases page](https://github.com/mrgeneko/NeuralAmpModelerPlugin/releases). Each release carries:
+
+| Asset | What it is |
+|---|---|
+| `Anti-Static-<version>-mac.dmg` | macOS installer -- VST3, Audio Unit, and standalone app |
+| `Anti-Static-<version>-win.zip` | Windows VST3 bundle and standalone app |
+| `muffinator_v4_optimal.param.nam` | A parametric demo model (see below) |
+| `*-dSYMs.zip`, `*-pdbs.zip` | Debug symbols; only useful for diagnosing crashes |
+
+No model is bundled with the plug-in, and it does nothing until one is loaded. To try the parametric knobs this fork adds, download `muffinator_v4_optimal.param.nam` alongside the plug-in and load it with the Model button. Any standard `.nam` file works too -- [ToneHunt](https://tonehunt.org) has a large library, though ordinary models have no parameters to expose.
+
+On Windows, unzip and drop the `AntiStatic.vst3` folder into `C:\Program Files\Common Files\VST3` (or `%LOCALAPPDATA%\Programs\Common\VST3` if you would rather not need admin rights), then rescan plug-ins in your DAW. Copy `AntiStatic_x64.exe` anywhere you like; it runs on its own.
+
+### A note on unsigned Windows builds
+
+The Windows binaries are not code-signed. The VST3 loads in a DAW without complaint, but the standalone `.exe` will raise a SmartScreen warning the first time you run it -- choose **More info**, then **Run anyway**. If Windows behaves oddly after extracting the zip, right-click the downloaded `.zip` and tick **Unblock** in its properties before extracting.
+
+## Building from source
+
+There are build scripts in [NeuralAmpModeler/scripts/](https://github.com/mrgeneko/NeuralAmpModelerPlugin/tree/main/NeuralAmpModeler/scripts).
+The [workflows](https://github.com/mrgeneko/NeuralAmpModelerPlugin/tree/main/.github/workflows) show exactly how they are invoked, including the SDK and prebuilt-library downloads that have to happen first.
+
+Clone with `--recurse-submodules`; the build needs iPlug2, eigen, AudioDSPTools, and NeuralAmpModelerCore. On Windows you will also need Visual Studio with the C++ desktop workload, Python, and (for the installer target only) Inno Setup 6.
 
 ## Supported Platforms
 
