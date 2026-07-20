@@ -20,24 +20,28 @@ jobs:
   create_release:
     name: Create release
     runs-on: ubuntu-latest
-    outputs:
-      upload_url: ${{steps.create_release.outputs.upload_url}}
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           submodules: recursive
 
-      - name: Create release
-        id: create_release
-        uses: actions/create-release@v1
+      # Creating the release up front (rather than letting the first build job
+      # create it) keeps the two build jobs from racing to create the same one.
+      - name: Create draft release
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        with:
-          draft: true
-          tag_name: ${{github.ref}}
-          release_name: Release ${{github.ref}}
-          body_path: ${{env.PROJECT_NAME}}/installer/changelog.txt
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          if gh release view "${{github.ref_name}}" --repo "${{github.repository}}" >/dev/null 2>&1; then
+            echo "Release ${{github.ref_name}} already exists, reusing it."
+          else
+            gh release create "${{github.ref_name}}" \
+              --repo "${{github.repository}}" \
+              --draft \
+              --title "Release ${{github.ref_name}}" \
+              --notes-file "${{env.PROJECT_NAME}}/installer/changelog.txt"
+          fi
+        shell: bash
 
   build:
     name: Build
@@ -54,7 +58,7 @@ jobs:
 
     steps:
     - name: Check out repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         submodules: recursive
 
@@ -85,35 +89,29 @@ jobs:
         ./makedist-mac.sh full installer
       shell: bash
 
-    - name: Upload mac DSYMs release asset
+    # gh upload fails on a missing path, so a build that silently produced no
+    # artifact fails the job here rather than finishing green with nothing
+    # attached to the release.
+    - name: Upload macOS release assets
       if: matrix.os == 'macOS-latest'
-      uses: actions/upload-release-asset@v1
       env:
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      with:
-        upload_url: ${{needs.create_release.outputs.upload_url}}
-        asset_path: ${{env.PROJECT_NAME}}/${{matrix.build_dir}}/out/${{steps.mac_archivename_step.outputs.archive_name}}-dSYMs.zip
-        asset_name: ${{steps.mac_archivename_step.outputs.archive_name}}-dSYMs.zip
-        asset_content_type: application/zip
-
-    - name: Upload mac dmg release asset
-      if: matrix.os == 'macOS-latest'
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      with:
-        upload_url: ${{needs.create_release.outputs.upload_url}}
-        asset_path: ${{env.PROJECT_NAME}}/${{matrix.build_dir}}/out/${{steps.mac_archivename_step.outputs.archive_name}}.dmg
-        asset_name: ${{steps.mac_archivename_step.outputs.archive_name}}.dmg
-        asset_content_type: application/octet-stream
+        GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        ARCHIVE_NAME: ${{steps.mac_archivename_step.outputs.archive_name}}
+      run: |
+        gh release upload "${{github.ref_name}}" \
+          "${{env.PROJECT_NAME}}/${{matrix.build_dir}}/out/${ARCHIVE_NAME}.dmg" \
+          "${{env.PROJECT_NAME}}/${{matrix.build_dir}}/out/${ARCHIVE_NAME}-dSYMs.zip" \
+          --repo "${{github.repository}}" \
+          --clobber
+      shell: bash
 
     - name: Add msbuild to PATH (Windows)
       if: matrix.os == 'windows-latest'
-      uses: microsoft/setup-msbuild@v1.0.2
+      uses: microsoft/setup-msbuild@v2
 
     - name: Setup Python3
       if: matrix.os == 'windows-latest'
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
         python-version: '3.x'
         architecture: 'x64'
@@ -133,24 +131,15 @@ jobs:
         .\makedist-win.bat full installer
       shell: pwsh
 
-    - name: Upload Windows pdb release asset
+    - name: Upload Windows release assets
       if: matrix.os == 'windows-latest'
-      uses: actions/upload-release-asset@v1
       env:
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      with:
-        upload_url: ${{needs.create_release.outputs.upload_url}}
-        asset_path: ${{env.PROJECT_NAME}}/${{matrix.build_dir}}/out/${{steps.win_archivename_step.outputs.archive_name}}-pdbs.zip
-        asset_name: ${{steps.win_archivename_step.outputs.archive_name}}-pdbs.zip
-        asset_content_type: application/zip
-
-    - name: Upload Windows zip release asset
-      if: matrix.os == 'windows-latest'
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      with:
-        upload_url: ${{needs.create_release.outputs.upload_url}}
-        asset_path: ${{env.PROJECT_NAME}}/${{matrix.build_dir}}/out/${{steps.win_archivename_step.outputs.archive_name}}.zip
-        asset_name: ${{steps.win_archivename_step.outputs.archive_name}}.zip
-        asset_content_type: application/zip
+        GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        ARCHIVE_NAME: ${{steps.win_archivename_step.outputs.archive_name}}
+      run: |
+        gh release upload "${{github.ref_name}}" \
+          "${{env.PROJECT_NAME}}/${{matrix.build_dir}}/out/${ARCHIVE_NAME}.zip" \
+          "${{env.PROJECT_NAME}}/${{matrix.build_dir}}/out/${ARCHIVE_NAME}-pdbs.zip" \
+          --repo "${{github.repository}}" \
+          --clobber
+      shell: bash
