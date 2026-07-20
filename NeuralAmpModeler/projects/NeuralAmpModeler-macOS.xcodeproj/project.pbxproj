@@ -58,7 +58,7 @@
 		4F1A5282205D913300CF2908 /* IPlugAPP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F1A5280205D913300CF2908 /* IPlugAPP.cpp */; };
 		4F1A5285205D914A00CF2908 /* IPlugAAX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F1A5284205D914A00CF2908 /* IPlugAAX.cpp */; };
 		4F1A528C205D916F00CF2908 /* IPlugAU.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F1A528A205D916F00CF2908 /* IPlugAU.cpp */; };
-		4F1B4AE42014D33600BC64D4 /* NeuralAmpModeler-macOS-MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1B4AE32014D33600BC64D4 /* NeuralAmpModeler-macOS-MainMenu.xib */; };
+		4F1B4AE42014D33600BC64D4 /* AntiStatic-macOS-MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1B4AE32014D33600BC64D4 /* AntiStatic-macOS-MainMenu.xib */; };
 		4F2EA978203A50EA008E4850 /* IPlugAPP_dialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F2EA977203A50E9008E4850 /* IPlugAPP_dialog.cpp */; };
 		4F2FB1542A0047420027AB66 /* Resample.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F2FB13A2A0047420027AB66 /* Resample.h */; };
 		4F2FB1552A0047420027AB66 /* RecursiveLinearFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F2FB13B2A0047420027AB66 /* RecursiveLinearFilter.cpp */; };
@@ -197,7 +197,7 @@
 		4F3862F12014BBEC0009F402 /* NeuralAmpModeler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F3862ED2014BBEC0009F402 /* NeuralAmpModeler.cpp */; };
 		4F3862F22014BBEC0009F402 /* NeuralAmpModeler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F3862ED2014BBEC0009F402 /* NeuralAmpModeler.cpp */; };
 		4F3862F32014BBEC0009F402 /* NeuralAmpModeler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F3862ED2014BBEC0009F402 /* NeuralAmpModeler.cpp */; };
-		4F3EE1C0231438D000004786 /* NeuralAmpModeler-macOS-MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1B4AE32014D33600BC64D4 /* NeuralAmpModeler-macOS-MainMenu.xib */; };
+		4F3EE1C0231438D000004786 /* AntiStatic-macOS-MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1B4AE32014D33600BC64D4 /* AntiStatic-macOS-MainMenu.xib */; };
 		4F3EE1C2231438D000004786 /* IPlugProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F8F61A8202807B9003F2573 /* IPlugProcessor.cpp */; };
 		4F3EE1C3231438D000004786 /* RtMidi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F10D3D7203A6719003EF82A /* RtMidi.cpp */; settings = {COMPILER_FLAGS = "-Wno-shorten-64-to-32"; }; };
 		4F3EE1C5231438D000004786 /* IGraphicsNanoVG_src.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F6369DC20A464BB0022C370 /* IGraphicsNanoVG_src.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -663,7 +663,7 @@
 		4F1A5287205D915B00CF2908 /* IPlugAUv3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPlugAUv3.h; path = ../../iPlug2/IPlug/AUv3/IPlugAUv3.h; sourceTree = "<group>"; };
 		4F1A5289205D916F00CF2908 /* IPlugAU.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; name = IPlugAU.h; path = ../../iPlug2/IPlug/AUv2/IPlugAU.h; sourceTree = "<group>"; tabWidth = 2; };
 		4F1A528A205D916F00CF2908 /* IPlugAU.cpp */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.cpp.cpp; name = IPlugAU.cpp; path = ../../iPlug2/IPlug/AUv2/IPlugAU.cpp; sourceTree = "<group>"; tabWidth = 2; };
-		4F1B4AE32014D33600BC64D4 /* NeuralAmpModeler-macOS-MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "NeuralAmpModeler-macOS-MainMenu.xib"; path = "../resources/NeuralAmpModeler-macOS-MainMenu.xib"; sourceTree = "<group>"; };
+		4F1B4AE32014D33600BC64D4 /* AntiStatic-macOS-MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "AntiStatic-macOS-MainMenu.xib"; path = "../resources/AntiStatic-macOS-MainMenu.xib"; sourceTree = "<group>"; };
 		4F1F1BE9135B1F60003A5BB2 /* wdlendian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wdlendian.h; path = ../../iPlug2/WDL/wdlendian.h; sourceTree = SOURCE_ROOT; };
 		4F23BA1313B647E50097A67E /* AntiStatic-AU-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "AntiStatic-AU-Info.plist"; path = "../resources/AntiStatic-AU-Info.plist"; sourceTree = "<group>"; };
 		4F23BA1413B647E50097A67E /* AntiStatic-macOS-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "AntiStatic-macOS-Info.plist"; path = "../resources/AntiStatic-macOS-Info.plist"; sourceTree = "<group>"; };
@@ -1168,7 +1168,7 @@
 				4FC82B4620BD522B00722133 /* fonts */,
 				4FA61F9922E8A96300A92C58 /* tex */,
 				4FC46E57231440B4000045E7 /* web */,
-				4F1B4AE32014D33600BC64D4 /* NeuralAmpModeler-macOS-MainMenu.xib */,
+				4F1B4AE32014D33600BC64D4 /* AntiStatic-macOS-MainMenu.xib */,
 				4F3FB118202273A500622761 /* NeuralAmpModeler-macOS.entitlements */,
 				4F98C32C20A7678800F120A9 /* IPlugAUViewController_vNeuralAmpModeler.xib */,
 				4FFF72B8214BB71400839091 /* main.rc */,
@@ -2378,7 +2378,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F3EE1C0231438D000004786 /* NeuralAmpModeler-macOS-MainMenu.xib in Resources */,
+				4F3EE1C0231438D000004786 /* AntiStatic-macOS-MainMenu.xib in Resources */,
 				4F037D77261F9DB400A752B5 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2409,7 +2409,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F1B4AE42014D33600BC64D4 /* NeuralAmpModeler-macOS-MainMenu.xib in Resources */,
+				4F1B4AE42014D33600BC64D4 /* AntiStatic-macOS-MainMenu.xib in Resources */,
 				4F037D76261F9DB400A752B5 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
