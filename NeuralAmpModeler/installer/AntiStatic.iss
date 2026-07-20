@@ -1,7 +1,7 @@
 [Setup]
 AppName=AntiStatic
 AppContact=murgencoapps@gmail.com
-AppCopyright=Copyright (C) 2022 Steven Atkinson
+AppCopyright=Copyright 2022 Steven Atkinson, 2026 Gene Ko
 AppPublisher=Gene Ko
 AppVersion=0.8.0
 VersionInfoVersion=0.8.0

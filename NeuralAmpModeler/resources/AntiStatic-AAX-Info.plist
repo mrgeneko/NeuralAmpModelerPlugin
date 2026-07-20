@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>AntiStatic</string>
 	<key>CFBundleGetInfoString</key>
-	<string>AntiStatic v0.8.0 Copyright 2026 Gene Ko</string>
+	<string>AntiStatic v0.8.0 Copyright 2022 Steven Atkinson, 2026 Gene Ko</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.GeneKo.aax.AntiStatic</string>
 	<key>CFBundleInfoDictionaryVersion</key>

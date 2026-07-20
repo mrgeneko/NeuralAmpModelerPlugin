@@ -6,7 +6,7 @@
 #define PLUG_MFR_ID 'GnKo'
 #define PLUG_URL_STR "https://github.com/mrgeneko/NeuralAmpModelerPlugin"
 #define PLUG_EMAIL_STR "spam@me.com"
-#define PLUG_COPYRIGHT_STR "Copyright 2026 Gene Ko"
+#define PLUG_COPYRIGHT_STR "Copyright 2022 Steven Atkinson, 2026 Gene Ko"
 #define PLUG_CLASS_NAME NeuralAmpModeler
 #define BUNDLE_NAME "AntiStatic"
 #define BUNDLE_MFR "GeneKo"

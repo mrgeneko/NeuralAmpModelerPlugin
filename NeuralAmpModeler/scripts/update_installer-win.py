@@ -50,7 +50,7 @@ def main():
         ),
         "AppCopyright": env_or_default(
             "INSTALLER_APP_COPYRIGHT",
-            "Copyright (C) 2022 Steven Atkinson",
+            "Copyright 2022 Steven Atkinson, 2026 Gene Ko",
         ),
         "AppPublisher": env_or_default("INSTALLER_APP_PUBLISHER", "Gene Ko"),
         # No AppPublisherURL/AppSupportURL: this fork has no site of its own, and

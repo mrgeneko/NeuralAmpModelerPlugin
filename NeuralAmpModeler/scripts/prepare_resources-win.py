@@ -1,69 +1,72 @@
 #!/usr/bin/env python3
 
-import plistlib, os, datetime, fileinput, glob, sys, string, shutil
+# Keeps the VERSIONINFO block in resources/main.rc in step with config.h.
+#
+# The previous version of this script was commented out in full, and could not
+# safely be re-enabled as written: it opened main.rc with mode "w" and wrote
+# only a VERSIONINFO block, which would have discarded every resource
+# declaration in the file -- the fonts, SVGs, bitmaps and dialogs the plug-in
+# actually loads. This rewrites the handful of values that track config.h and
+# leaves the rest of the file untouched.
+
+import os, re, sys
 
 scriptpath = os.path.dirname(os.path.realpath(__file__))
 projectpath = os.path.abspath(os.path.join(scriptpath, os.pardir))
 
 IPLUG2_ROOT = "../../iPlug2"
 
-sys.path.insert(0, os.path.join(os.getcwd(), IPLUG2_ROOT + "/Scripts"))
+sys.path.insert(0, os.path.join(scriptpath, IPLUG2_ROOT + "/Scripts"))
 
 from parse_config import parse_config
 
 
 def main():
-    print("not modifying rc file")
-    # config = parse_config(projectpath)
+    config = parse_config(projectpath)
 
-    # rc = open(projectpath + "/resources/main.rc", "w")
+    rcpath = os.path.join(projectpath, "resources", "main.rc")
 
-    # rc.write("\n")
-    # rc.write("/////////////////////////////////////////////////////////////////////////////\n")
-    # rc.write("// Version\n")
-    # rc.write("/////////////////////////////////////////////////////////////////////////////\n")
-    # rc.write("VS_VERSION_INFO VERSIONINFO\n")
-    # rc.write("FILEVERSION " + config['MAJOR_STR'] + "," + config['MINOR_STR'] + "," + config['BUGFIX_STR'] + ",0\n")
-    # rc.write("PRODUCTVERSION " + config['MAJOR_STR'] + "," + config['MINOR_STR'] + "," + config['BUGFIX_STR'] + ",0\n")
-    # rc.write(" FILEFLAGSMASK 0x3fL\n")
-    # rc.write("#ifdef _DEBUG\n")
-    # rc.write(" FILEFLAGS 0x1L\n")
-    # rc.write("#else\n")
-    # rc.write(" FILEFLAGS 0x0L\n")
-    # rc.write("#endif\n")
-    # rc.write(" FILEOS 0x40004L\n")
-    # rc.write(" FILETYPE 0x1L\n")
-    # rc.write(" FILESUBTYPE 0x0L\n")
-    # rc.write("BEGIN\n")
-    # rc.write('    BLOCK "StringFileInfo"\n')
-    # rc.write("    BEGIN\n")
-    # rc.write('        BLOCK "040004e4"\n')
-    # rc.write("        BEGIN\n")
-    # rc.write('            VALUE "FileVersion", "' + config['FULL_VER_STR'] + '"\0\n')
-    # rc.write('            VALUE "ProductVersion", "' + config['FULL_VER_STR'] + '"0\n')
-    # rc.write("#ifdef VST2_API\n")
-    # rc.write('            VALUE "OriginalFilename", "' + config['BUNDLE_NAME'] + '.dll"\0\n')
-    # rc.write("#elif defined VST3_API\n")
-    # rc.write('            VALUE "OriginalFilename", "' + config['BUNDLE_NAME'] + '.vst3"\0\n')
-    # rc.write("#elif defined AAX_API\n")
-    # rc.write('            VALUE "OriginalFilename", "' + config['BUNDLE_NAME'] + '.aaxplugin"\0\n')
-    # rc.write("#elif defined APP_API\n")
-    # rc.write('            VALUE "OriginalFilename", "' + config['BUNDLE_NAME'] + '.exe"\0\n')
-    # rc.write("#endif\n")
-    # rc.write('            VALUE "FileDescription", "' + config['PLUG_NAME'] + '"\0\n')
-    # rc.write('            VALUE "InternalName", "' + config['PLUG_NAME'] + '"\0\n')
-    # rc.write('            VALUE "ProductName", "' + config['PLUG_NAME'] + '"\0\n')
-    # rc.write('            VALUE "CompanyName", "' + config['PLUG_MFR'] + '"\0\n')
-    # rc.write('            VALUE "LegalCopyright", "' + config['PLUG_COPYRIGHT_STR'] + '"\0\n')
-    # rc.write('            VALUE "LegalTrademarks", "' + config['PLUG_TRADEMARKS'] + '"\0\n')
-    # rc.write("        END\n")
-    # rc.write("    END\n")
-    # rc.write('    BLOCK "VarFileInfo"\n')
-    # rc.write("    BEGIN\n")
-    # rc.write('        VALUE "Translation", 0x400, 1252\n')
-    # rc.write("    END\n")
-    # rc.write("END\n")
-    # rc.write("\n")
+    with open(rcpath, "r") as f:
+        rc = f.read()
+
+    comma_version = "{},{},{},0".format(
+        config["MAJOR_STR"], config["MINOR_STR"], config["BUGFIX_STR"]
+    )
+
+    # Only the values that track config.h. Plug-in and company names are left
+    # alone: they are already correct, and rewriting them here would mean two
+    # places could disagree about them.
+    substitutions = [
+        (r"(^\s*FILEVERSION\s+)[\d,]+", r"\g<1>" + comma_version),
+        (r"(^\s*PRODUCTVERSION\s+)[\d,]+", r"\g<1>" + comma_version),
+        (r'(VALUE "FileVersion",\s*")[^"]*"', r"\g<1>" + config["FULL_VER_STR"] + '"'),
+        (r'(VALUE "ProductVersion",\s*")[^"]*"', r"\g<1>" + config["FULL_VER_STR"] + '"'),
+        (
+            r'(VALUE "LegalCopyright",\s*")[^"]*"',
+            r"\g<1>" + config["PLUG_COPYRIGHT_STR"] + '"',
+        ),
+    ]
+
+    for pattern, replacement in substitutions:
+        rc, count = re.subn(pattern, replacement, rc, flags=re.MULTILINE)
+
+        # A silent no-op here would ship stale version and copyright strings in
+        # the binaries' file properties, which is exactly how main.rc came to
+        # claim version 0.0.1 and "Copyright 2020 Acme Inc".
+        if count == 0:
+            raise RuntimeError(
+                "no VERSIONINFO match for " + pattern + " in " + rcpath
+            )
+
+    with open(rcpath, "w") as f:
+        f.write(rc)
+
+    print(
+        "main.rc VERSIONINFO set to "
+        + config["FULL_VER_STR"]
+        + ", "
+        + config["PLUG_COPYRIGHT_STR"]
+    )
 
 
 if __name__ == "__main__":
