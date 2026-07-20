@@ -7,7 +7,7 @@ BASEDIR=$(dirname $0)
 cd $BASEDIR/..
 
 if [ -d build-mac ]; then
-  sudo rm -f -R build-mac
+  rm -f -R build-mac
 fi
 
 #---------------------------------------------------------------------------------------------------------
@@ -127,15 +127,15 @@ echo "remove existing binaries"
 echo ""
 
 if [ -d $APP ]; then
-  sudo rm -f -R -f $APP
+  rm -f -R -f $APP
 fi
 
 if [ -d $AU ]; then
- sudo rm -f -R $AU
+ rm -f -R $AU
 fi
 
 if [ -d $VST3 ]; then
-  sudo rm -f -R $VST3
+  rm -f -R $VST3
 fi
 
 if [ -d "${AAX}" ]; then
@@ -236,7 +236,7 @@ if [ $BUILD_INSTALLER == 1 ]; then
   #---------------------------------------------------------------------------------------------------------
   # installer
 
-  sudo rm -R -f build-mac/$PLUGIN_NAME-*.dmg
+  rm -R -f build-mac/$PLUGIN_NAME-*.dmg
 
   echo "building installer"
   echo ""
@@ -267,7 +267,7 @@ if [ $BUILD_INSTALLER == 1 ]; then
     hdiutil create build-mac/$ARCHIVE_NAME.dmg -format UDZO -srcfolder build-mac/installer/ -ov -anyowners -volname $PLUGIN_NAME
   fi
 
-  sudo rm -R -f build-mac/installer/
+  rm -R -f build-mac/installer/
 
   if [ $CODESIGN == 1 ]; then
     #---------------------------------------------------------------------------------------------------------
@@ -319,7 +319,7 @@ fi
 
 #---------------------------------------------------------------------------------------------------------
 # dSYMs
-sudo rm -R -f build-mac/*-dSYMs.zip
+rm -R -f build-mac/*-dSYMs.zip
 
 echo "packaging dSYMs"
 echo ""
