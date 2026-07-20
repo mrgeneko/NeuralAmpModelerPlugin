@@ -22,8 +22,8 @@ CODESIGN=${CODESIGN:-0}
 
 # macOS codesigning/notarization
 INSTALLER_PKG_ID_PREFIX=${INSTALLER_PKG_ID_PREFIX:-com.GeneKo}
-APP_SPECIFIC_ID=${APP_SPECIFIC_ID:-TODO}
-APP_SPECIFIC_PWD=${APP_SPECIFIC_PWD:-TODO}
+# one-time setup: xcrun notarytool store-credentials "<profile>" --apple-id "<apple-id>" --team-id "<team-id>"
+NOTARIZE_KEYCHAIN_PROFILE=${NOTARIZE_KEYCHAIN_PROFILE:-AntiStatic-notarize}
 
 # AAX/PACE wraptool codesigning
 ILOK_ID=${ILOK_ID:-TODO}
@@ -54,9 +54,6 @@ FULL_VERSION=$MAJOR_VERSION"."$MINOR_VERSION"."$BUG_FIX
 PLUGIN_NAME=`echo | grep BUNDLE_NAME config.h`
 PLUGIN_NAME=${PLUGIN_NAME//\#define BUNDLE_NAME }
 PLUGIN_NAME=${PLUGIN_NAME//\"}
-
-NOTARIZE_BUNDLE_ID=${NOTARIZE_BUNDLE_ID:-${INSTALLER_PKG_ID_PREFIX}.${PLUGIN_NAME}}
-NOTARIZE_BUNDLE_ID_DEMO=${NOTARIZE_BUNDLE_ID_DEMO:-${INSTALLER_PKG_ID_PREFIX}.${PLUGIN_NAME}.DEMO}
 
 ARCHIVE_NAME=$PLUGIN_NAME-v$FULL_VERSION-mac
 THIRD_PARTY_NOTICES="./installer/ThirdPartyNotices.txt"
@@ -278,18 +275,10 @@ if [ $BUILD_INSTALLER == 1 ]; then
     #notarize dmg
     echo "notarizing"
     echo ""
-    # you need to create an app-specific id/password https://support.apple.com/en-us/HT204397
-    # arg 1 Set to the dmg path
-    # arg 2 Set to a bundle ID (doesn't have to match your )
-    # arg 3 Set to the app specific Apple ID username/email
-    # arg 4 Set to the app specific Apple password  
+    # one-time setup: xcrun notarytool store-credentials "$NOTARIZE_KEYCHAIN_PROFILE" --apple-id "<apple-id>" --team-id "<team-id>"
     PWD=`pwd`
 
-    if [ $DEMO == 1 ]; then
-      ./$SCRIPTS/notarise.sh "${PWD}/build-mac" "${PWD}/build-mac/${ARCHIVE_NAME}.dmg" $NOTARIZE_BUNDLE_ID_DEMO $APP_SPECIFIC_ID $APP_SPECIFIC_PWD
-    else
-      ./$SCRIPTS/notarise.sh "${PWD}/build-mac" "${PWD}/build-mac/${ARCHIVE_NAME}.dmg" $NOTARIZE_BUNDLE_ID $APP_SPECIFIC_ID $APP_SPECIFIC_PWD
-    fi
+    ./scripts/notarise-mac.sh "${PWD}/build-mac" "${PWD}/build-mac/${ARCHIVE_NAME}.dmg" "$NOTARIZE_KEYCHAIN_PROFILE"
 
     if [ "${PIPESTATUS[0]}" -ne "0" ]; then
       echo "ERROR: notarize script failed, aborting"
