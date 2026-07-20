@@ -264,10 +264,7 @@ if [ $BUILD_INSTALLER == 1 ]; then
   else
     cp installer/changelog.txt build-mac/installer/
     cp installer/known-issues.txt build-mac/installer/
-    # Literal name: the manual was never renamed with the rest of the rebrand,
-    # so this is still "NeuralAmpModeler manual.pdf" on disk. makezip-win.py
-    # refers to it the same way.
-    cp "manual/NeuralAmpModeler manual.pdf" build-mac/installer/
+    cp "manual/$PLUGIN_NAME manual.pdf" build-mac/installer/
     hdiutil create build-mac/$ARCHIVE_NAME.dmg -format UDZO -srcfolder build-mac/installer/ -ov -anyowners -volname $PLUGIN_NAME
   fi
 

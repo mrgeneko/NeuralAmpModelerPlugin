@@ -3,9 +3,9 @@ import zipfile, os, fileinput, glob, string, sys, shutil
 scriptpath = os.path.dirname(os.path.realpath(__file__))
 projectpath = os.path.abspath(os.path.join(scriptpath, os.pardir))
 
-IPLUG2_ROOT = "..\..\iPlug2"
+IPLUG2_ROOT = r"..\..\iPlug2"
 
-sys.path.insert(0, os.path.join(scriptpath, IPLUG2_ROOT + "\Scripts"))
+sys.path.insert(0, os.path.join(scriptpath, IPLUG2_ROOT + r"\Scripts"))
 
 from get_archive_name import get_archive_name
 
@@ -58,7 +58,7 @@ def main():
                 projectpath + installer,
                 projectpath + "\\installer\\changelog.txt",
                 projectpath + "\\installer\\known-issues.txt",
-                projectpath + "\\manual\\NeuralAmpModeler manual.pdf",
+                projectpath + "\\manual\\AntiStatic manual.pdf",
             ]
         ]
     else:
