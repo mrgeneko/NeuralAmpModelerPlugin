@@ -1144,6 +1144,10 @@ void NeuralAmpModeler::_UpdateControlsFromModel()
 
         // Reconfigure this slot's declared range/name/default from the model's own metadata.
         GetParam(paramIdx)->InitDouble(label.c_str(), def.default_val, def.min_val, def.max_val, step);
+        // step (range/1000) would otherwise drive the displayed decimal count as high as 4-6
+        // places for some models' ranges -- cap the on-screen readout at 2 decimals regardless
+        // of step, which still governs the knob's actual drag granularity.
+        GetParam(paramIdx)->SetDisplayPrecision(2);
 
         // A switch of the wrong state count (or a knob, when this slot is now discrete --
         // or vice versa) can't be reconfigured in place: IVTabSwitchControl bakes its button
