@@ -1,7 +1,7 @@
 #define PLUG_NAME "Anti-Static"
 #define PLUG_MFR "Gene Ko"
-#define PLUG_VERSION_HEX 0x0000070f
-#define PLUG_VERSION_STR "0.7.15"
+#define PLUG_VERSION_HEX 0x00000800
+#define PLUG_VERSION_STR "0.8.0"
 #define PLUG_UNIQUE_ID 'AntS'
 #define PLUG_MFR_ID 'GnKo'
 #define PLUG_URL_STR "https://github.com/mrgeneko/NeuralAmpModelerPlugin"

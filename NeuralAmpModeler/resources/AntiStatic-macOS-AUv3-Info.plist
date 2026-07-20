@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>AntiStatic</string>
 	<key>CFBundleGetInfoString</key>
-	<string>AntiStatic v0.7.15 Copyright 2026 Gene Ko</string>
+	<string>AntiStatic v0.8.0 Copyright 2026 Gene Ko</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.GeneKo.app.AntiStatic.AUv3</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.7.15</string>
+	<string>0.8.0</string>
 	<key>CFBundleVersion</key>
-	<string>0.7.15</string>
+	<string>0.8.0</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.12.0</string>
 	<key>NSExtension</key>

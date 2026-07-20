@@ -24,13 +24,13 @@
 		</dict>
 	</array>
 	<key>AudioUnit Version</key>
-	<string>0x0000070f</string>
+	<string>0x00000800</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
 	<string>AntiStatic</string>
 	<key>CFBundleGetInfoString</key>
-	<string>AntiStatic v0.7.15 Copyright 2026 Gene Ko</string>
+	<string>AntiStatic v0.8.0 Copyright 2026 Gene Ko</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.GeneKo.audiounit.AntiStatic</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -40,11 +40,11 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.7.15</string>
+	<string>0.8.0</string>
 	<key>CFBundleSignature</key>
 	<string>AntS</string>
 	<key>CFBundleVersion</key>
-	<string>0.7.15</string>
+	<string>0.8.0</string>
 	<key>CSResourcesFileMapped</key>
 	<true/>
 	<key>LSMinimumSystemVersion</key>
