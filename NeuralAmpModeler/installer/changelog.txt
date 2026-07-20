@@ -1,33 +1,8 @@
 Anti-Static changelog
 https://github.com/mrgeneko/NeuralAmpModelerPlugin
 
-Anti-Static is a fork of Neural Amp Modeler. Entries through v0.7.15 are the
-upstream plug-in's history, kept for reference. v0.8.0 is this fork's first
-release.
-
-00/00/0000 - v0.5.5 Tweak UI
-12/10/2022 - v0.5.6 Tweak UI
-12/16/2022 - v0.5.7
-12/22/2022 - v0.5.8
-01/02/2023 - v0.6.0
-01/28/2023 - v0.6.1
-02/04/2023 - v0.6.2
-03/05/2023 - v0.7.0
-03/26/2023 - v0.7.1
-04/17/2023 - v0.7.2
-05/09/2023 - v0.7.3
-06/19/2023 - v0.7.4
-07/15/2023 - v0.7.5
-12/06/2023 - v0.7.6
-12/13/2023 - v0.7.7
-01/30/2024 - v0.7.8
-04/04/2024 - v0.7.9
-09/08/2024 - v0.7.10
-10/29/2024 - v0.7.11
-11/30/2024 - v0.7.12
-12/20/2024 - v0.7.13
-04/29/2026 - v0.7.14
-06/02/2026 - v0.7.15
+Newest first. Anti-Static is a fork of Neural Amp Modeler; entries from v0.7.15
+down are the upstream plug-in's history, kept for reference.
 
 07/20/2026 - v0.8.0 First Anti-Static release
   - Parametric models: a model's own knobs and switches appear in the plug-in,
@@ -48,3 +23,27 @@ release.
     since ordinary .nam models have no parameters for the knob row to show.
   - Windows: the Third Party Notices link in the settings page works again; it
     was broken by the plug-in bundle being flattened during packaging.
+
+06/02/2026 - v0.7.15
+04/29/2026 - v0.7.14
+12/20/2024 - v0.7.13
+11/30/2024 - v0.7.12
+10/29/2024 - v0.7.11
+09/08/2024 - v0.7.10
+04/04/2024 - v0.7.9
+01/30/2024 - v0.7.8
+12/13/2023 - v0.7.7
+12/06/2023 - v0.7.6
+07/15/2023 - v0.7.5
+06/19/2023 - v0.7.4
+05/09/2023 - v0.7.3
+04/17/2023 - v0.7.2
+03/26/2023 - v0.7.1
+03/05/2023 - v0.7.0
+02/04/2023 - v0.6.2
+01/28/2023 - v0.6.1
+01/02/2023 - v0.6.0
+12/22/2022 - v0.5.8
+12/16/2022 - v0.5.7
+12/10/2022 - v0.5.6 Tweak UI
+00/00/0000 - v0.5.5 Tweak UI
