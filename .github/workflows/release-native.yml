@@ -32,6 +32,21 @@ jobs:
         with:
           submodules: recursive
 
+      # release_notes_header.md carries the Downloads / Before-you-install
+      # sections (asset names, the signed-and-notarized-on-macOS note) that
+      # changelog.txt itself doesn't have -- it's just the changelog, kept
+      # as its own file since it's also shown as installer text on Windows/
+      # macOS, where the Downloads section wouldn't make sense.
+      # __VERSION__ matches github.ref_name's own format (e.g. "v0.8.1"),
+      # same as the archive filenames get_archive_name.py produces.
+      - name: Build release notes
+        run: |
+          sed "s/__VERSION__/${{github.ref_name}}/g" \
+            "${{env.PROJECT_NAME}}/installer/release_notes_header.md" \
+            > /tmp/release_notes.md
+          cat "${{env.PROJECT_NAME}}/installer/changelog.txt" >> /tmp/release_notes.md
+        shell: bash
+
       # Creating the release up front (rather than letting the first build job
       # create it) keeps the two build jobs from racing to create the same one.
       - name: Create draft release
@@ -39,13 +54,16 @@ jobs:
           GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           if gh release view "${{github.ref_name}}" --repo "${{github.repository}}" >/dev/null 2>&1; then
-            echo "Release ${{github.ref_name}} already exists, reusing it."
+            echo "Release ${{github.ref_name}} already exists; updating its notes."
+            gh release edit "${{github.ref_name}}" \
+              --repo "${{github.repository}}" \
+              --notes-file /tmp/release_notes.md
           else
             gh release create "${{github.ref_name}}" \
               --repo "${{github.repository}}" \
               --draft \
               --title "Release ${{github.ref_name}}" \
-              --notes-file "${{env.PROJECT_NAME}}/installer/changelog.txt"
+              --notes-file /tmp/release_notes.md
           fi
         shell: bash
 
