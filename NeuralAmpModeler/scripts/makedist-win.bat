@@ -37,7 +37,16 @@ echo ------------------------------------------------------------------
 echo Updating version numbers ...
 
 call python prepare_resources-win.py %DEMO%
+if errorlevel 1 (
+  echo ERROR: prepare_resources-win.py failed
+  exit /B 1
+)
+
 call python update_installer-win.py %DEMO%
+if errorlevel 1 (
+  echo ERROR: update_installer-win.py failed
+  exit /B 1
+)
 
 cd ..\
 
@@ -85,6 +94,12 @@ REM msbuild NeuralAmpModeler.sln /p:configuration=release /p:platform=win32 /nol
 REM echo Building 64 bit binaries...
 REM add projects with /t to build VST3 and AAX
 msbuild NeuralAmpModeler.sln /t:NeuralAmpModeler-app;NeuralAmpModeler-vst3 /p:configuration=release /p:platform=x64 /nologo /verbosity:minimal /fileLogger /m /flp:logfile=build-win.log;errorsonly;append
+if errorlevel 1 (
+  echo ------------------------------------------------------------------
+  echo BUILD FAILED - printing log file to console...
+  if exist "build-win.log" type build-win.log
+  goto FAILURE
+)
 
 REM --echo Copying AAX Presets
 
@@ -108,6 +123,10 @@ echo Making Installer ...
 
   REM :64-Bit-is
   "%ProgramFiles(x86)%\Inno Setup 6\iscc" /Q ".\installer\AntiStatic.iss"
+  if errorlevel 1 (
+    echo ERROR: Inno Setup failed to build the installer
+    goto FAILURE
+  )
   REM goto END-is
 
   REM :END-is
@@ -125,9 +144,24 @@ echo Making Installer ...
   echo Making Zip File ...
 )
 
-FOR /F "tokens=* USEBACKQ" %%F IN (`call python scripts\makezip-win.py %DEMO% %ZIP%`) DO (
+REM - FOR /F over a backquoted command discards that command's exit code, which
+REM - is how a makezip-win.py traceback used to ship an empty zip as a "success".
+REM - Redirect to a temp file instead so %ERRORLEVEL% is the script's own.
+call python scripts\makezip-win.py %DEMO% %ZIP% > "%TEMP%\antistatic-zipname.txt" 2>&1
+set MAKEZIP_ERRORLEVEL=%ERRORLEVEL%
+
+if exist "%TEMP%\antistatic-zipname.txt" type "%TEMP%\antistatic-zipname.txt"
+
+if not "%MAKEZIP_ERRORLEVEL%"=="0" (
+  echo ERROR: makezip-win.py failed with exit code %MAKEZIP_ERRORLEVEL%
+  del "%TEMP%\antistatic-zipname.txt" 2>nul
+  goto FAILURE
+)
+
+FOR /F "usebackq tokens=* delims=" %%F IN ("%TEMP%\antistatic-zipname.txt") DO (
 SET ZIP_NAME=%%F
 )
+del "%TEMP%\antistatic-zipname.txt" 2>nul
 
 echo ------------------------------------------------------------------
 echo Printing log file to console...
@@ -137,6 +171,11 @@ goto SUCCESS
 
 :USAGE
 echo Usage: %0 [demo/full] [zip/installer]
+exit /B 1
+
+:FAILURE
+echo ------------------------------------------------------------------
+echo makedist-win.bat FAILED
 exit /B 1
 
 :SUCCESS

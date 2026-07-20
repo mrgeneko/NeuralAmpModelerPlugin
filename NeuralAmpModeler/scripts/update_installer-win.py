@@ -52,9 +52,7 @@ def main():
             "INSTALLER_APP_COPYRIGHT",
             "Copyright (C) 2022 Steven Atkinson",
         ),
-        "AppPublisher": env_or_default(
-            "INSTALLER_APP_PUBLISHER", "Steven Atkinson"
-        ),
+        "AppPublisher": env_or_default("INSTALLER_APP_PUBLISHER", "Gene Ko"),
         "AppPublisherURL": env_or_default(
             "INSTALLER_APP_PUBLISHER_URL",
             "https://www.neuralampmodeler.com/",

@@ -2,7 +2,7 @@
 AppName=AntiStatic
 AppContact=neuralampmodeler@gmail.com
 AppCopyright=Copyright (C) 2022 Steven Atkinson
-AppPublisher=Steven Atkinson
+AppPublisher=Gene Ko
 AppPublisherURL=https://www.neuralampmodeler.com/
 AppSupportURL=https://www.neuralampmodeler.com/
 AppVersion=0.7.15
