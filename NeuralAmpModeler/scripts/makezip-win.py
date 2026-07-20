@@ -58,7 +58,6 @@ def main():
                 projectpath + installer,
                 projectpath + "\\installer\\changelog.txt",
                 projectpath + "\\installer\\known-issues.txt",
-                projectpath + "\\manual\\AntiStatic manual.pdf",
             ]
         ]
     else:

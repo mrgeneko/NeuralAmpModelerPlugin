@@ -36,7 +36,6 @@ Name: "app"; Description: "Standalone application (.exe)"; Types: full custom;
 Name: "vst3_64"; Description: "64-bit VST3 Plugin (.vst3)"; Types: full custom; Check: Is64BitInstallMode;
 ;Name: "aax_32"; Description: "32-bit AAX Plugin (.aaxplugin)"; Types: full custom;
 ;Name: "aax_64"; Description: "64-bit AAX Plugin (.aaxplugin)"; Types: full custom; Check: Is64BitInstallMode;
-Name: "manual"; Description: "User guide"; Types: full custom; Flags: fixed
 
 [Dirs] 
 ;Name: "{cf32}\Avid\Audio\Plug-Ins\NeuralAmpModeler.aaxplugin\"; Attribs: readonly; Components:aax_32; 
@@ -71,13 +70,11 @@ Source: "ThirdPartyNotices.txt"; DestDir: "{cf64}\VST3\AntiStatic.vst3\Contents\
 ;Source: "..\build-win\NeuralAmpModeler.aaxplugin\Desktop.ini"; DestDir: "{cf64}\Avid\Audio\Plug-Ins\NeuralAmpModeler.aaxplugin\"; Check: Is64BitInstallMode; Components:aax_64; Flags: overwritereadonly ignoreversion; Attribs: hidden system;
 ;Source: "..\build-win\NeuralAmpModeler.aaxplugin\PlugIn.ico"; DestDir: "{cf64}\Avid\Audio\Plug-Ins\NeuralAmpModeler.aaxplugin\"; Check: Is64BitInstallMode; Components:aax_64; Flags: overwritereadonly ignoreversion; Attribs: hidden system;
 
-Source: "..\manual\AntiStatic manual.pdf"; DestDir: "{app}"
 Source: "changelog.txt"; DestDir: "{app}"
 Source: "readme-win.rtf"; DestDir: "{app}"; DestName: "readme.rtf"; Flags: isreadme
 
 [Icons]
 Name: "{group}\Anti-Static"; Filename: "{app}\AntiStatic_x64.exe"
-Name: "{group}\User guide"; Filename: "{app}\AntiStatic manual.pdf"
 Name: "{group}\Changelog"; Filename: "{app}\changelog.txt"
 ;Name: "{group}\readme"; Filename: "{app}\readme.rtf"
 Name: "{group}\Uninstall Anti-Static"; Filename: "{app}\unins000.exe"
