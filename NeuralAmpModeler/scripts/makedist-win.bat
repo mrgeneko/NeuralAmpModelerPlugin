@@ -107,7 +107,7 @@ echo Making Installer ...
   REM goto END-is
 
   REM :64-Bit-is
-  "%ProgramFiles(x86)%\Inno Setup 6\iscc" /Q ".\installer\NeuralAmpModeler.iss"
+  "%ProgramFiles(x86)%\Inno Setup 6\iscc" /Q ".\installer\AntiStatic.iss"
   REM goto END-is
 
   REM :END-is

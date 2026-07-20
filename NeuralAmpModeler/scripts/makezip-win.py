@@ -28,10 +28,10 @@ def main():
     files = []
 
     if not zip:
-        installer = "\\build-win\\installer\\NeuralAmpModeler Installer.exe"
+        installer = "\\build-win\\installer\\AntiStatic Installer.exe"
 
         if demo:
-            installer = "\\build-win\\installer\\NeuralAmpModeler Demo Installer.exe"
+            installer = "\\build-win\\installer\\AntiStatic Demo Installer.exe"
 
         files = [
             projectpath + installer,
