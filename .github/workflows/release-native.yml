@@ -43,6 +43,21 @@ jobs:
           fi
         shell: bash
 
+      # The demo parametric model the fork's settings-page knobs exist to drive.
+      # Nothing installs a model, so without this a user has no way to exercise
+      # that feature on a fresh install. Uploaded here rather than from the
+      # build jobs because it is platform-independent -- doing it in the matrix
+      # would have two runners racing to write the same asset name.
+      - name: Upload demo parametric model
+        env:
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          gh release upload "${{github.ref_name}}" \
+            ParametricModels/muffinator_v4_optimal.param.nam \
+            --repo "${{github.repository}}" \
+            --clobber
+        shell: bash
+
   build:
     name: Build
     needs: create_release
