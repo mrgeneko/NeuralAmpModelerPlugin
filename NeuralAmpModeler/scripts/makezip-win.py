@@ -1,4 +1,4 @@
-import zipfile, os, fileinput, string, sys, shutil
+import zipfile, os, fileinput, glob, string, sys, shutil
 
 scriptpath = os.path.dirname(os.path.realpath(__file__))
 projectpath = os.path.abspath(os.path.join(scriptpath, os.pardir))
@@ -42,8 +42,8 @@ def main():
     else:
         files = [
             projectpath
-            + "\\build-win\\NeuralAmpModeler.vst3\\Contents\\x86_64-win\\NeuralAmpModeler.vst3",
-            projectpath + "\\build-win\\NeuralAmpModeler_x64.exe",
+            + "\\build-win\\AntiStatic.vst3\\Contents\\x86_64-win\\AntiStatic.vst3",
+            projectpath + "\\build-win\\AntiStatic_x64.exe",
         ]
 
     zipname = get_archive_name(projectpath, "win", "demo" if demo == 1 else "full")
@@ -63,10 +63,9 @@ def main():
         projectpath + "\\build-win\\out\\" + zipname + "-pdbs.zip", mode="w"
     )
 
-    files = [
-        projectpath + "\\build-win\\pdbs\\NeuralAmpModeler-vst3_x64.pdb",
-        projectpath + "\\build-win\\pdbs\\NeuralAmpModeler-app_x64.pdb",
-    ]
+    # Both projects set TargetName to BINARY_NAME, so they share one PDB path
+    # rather than getting per-target names. Glob so this can't drift again.
+    files = glob.glob(projectpath + "\\build-win\\pdbs\\*.pdb")
 
     for f in files:
         print("adding " + f)
