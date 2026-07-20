@@ -26,7 +26,13 @@ if [ "$VERSION" == "" ]; then
   exit 1
 fi
 
-PRODUCT_NAME=NeuralAmpModeler
+# Read from config.h rather than hardcoded. The build_flavor guards below test
+# for $PRODUCTS/$VST3 and friends, which are built from this name, so a stale
+# value skips every flavor silently and productbuild still writes an installer
+# -- an empty one, with no error anywhere.
+PRODUCT_NAME=`grep BUNDLE_NAME config.h`
+PRODUCT_NAME=${PRODUCT_NAME//\#define BUNDLE_NAME }
+PRODUCT_NAME=${PRODUCT_NAME//\"}
 PKG_ID_PREFIX="${INSTALLER_PKG_ID_PREFIX:-com.GeneKo}"
 
 # locations

@@ -55,7 +55,6 @@ PLUGIN_NAME=`echo | grep BUNDLE_NAME config.h`
 PLUGIN_NAME=${PLUGIN_NAME//\#define BUNDLE_NAME }
 PLUGIN_NAME=${PLUGIN_NAME//\"}
 
-ARCHIVE_NAME=$PLUGIN_NAME-v$FULL_VERSION-mac
 THIRD_PARTY_NOTICES="./installer/ThirdPartyNotices.txt"
 
 copy_third_party_notices()
@@ -68,16 +67,17 @@ copy_third_party_notices()
   fi
 }
 
+# release-native.yml names the release assets with get_archive_name.py, so this
+# has to agree with it or the upload step 404s on files the build did produce.
+# That script keys off PLUG_NAME ("Anti-Static"); PLUGIN_NAME above is
+# BUNDLE_NAME ("AntiStatic"). Different strings -- hence deriving it here rather
+# than reassembling the name by hand. Its first argument is a project path, not
+# a plug-in name.
 if [ $DEMO == 1 ]; then
-  ARCHIVE_NAME=$ARCHIVE_NAME-demo
+  ARCHIVE_NAME=`python3 ${SCRIPTS}/get_archive_name.py . mac demo`
+else
+  ARCHIVE_NAME=`python3 ${SCRIPTS}/get_archive_name.py . mac full`
 fi
-
-# TODO: use get_archive_name script
-# if [ $DEMO == 1 ]; then
-#   ARCHIVE_NAME=`python3 ${SCRIPTS}/get_archive_name.py ${PLUGIN_NAME} mac demo`
-# else
-#   ARCHIVE_NAME=`python3 ${SCRIPTS}/get_archive_name.py ${PLUGIN_NAME} mac full`
-# fi
 
 VST3=`echo | grep VST3_PATH $XCCONFIG`
 VST3=$HOME${VST3//\VST3_PATH = \$(HOME)}/$PLUGIN_NAME.vst3
@@ -264,7 +264,10 @@ if [ $BUILD_INSTALLER == 1 ]; then
   else
     cp installer/changelog.txt build-mac/installer/
     cp installer/known-issues.txt build-mac/installer/
-    cp "manual/$PLUGIN_NAME manual.pdf" build-mac/installer/
+    # Literal name: the manual was never renamed with the rest of the rebrand,
+    # so this is still "NeuralAmpModeler manual.pdf" on disk. makezip-win.py
+    # refers to it the same way.
+    cp "manual/NeuralAmpModeler manual.pdf" build-mac/installer/
     hdiutil create build-mac/$ARCHIVE_NAME.dmg -format UDZO -srcfolder build-mac/installer/ -ov -anyowners -volname $PLUGIN_NAME
   fi
 
