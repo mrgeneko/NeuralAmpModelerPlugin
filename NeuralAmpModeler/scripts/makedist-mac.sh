@@ -17,8 +17,8 @@ IPLUG2_ROOT=../iPlug2
 XCCONFIG=$IPLUG2_ROOT/../common-mac.xcconfig
 SCRIPTS=$IPLUG2_ROOT/Scripts
 
-# CODESIGN disabled by default. 
-CODESIGN=0
+# CODESIGN disabled by default; override with CODESIGN=1 ./makedist-mac.sh
+CODESIGN=${CODESIGN:-0}
 
 # macOS codesigning/notarization
 INSTALLER_PKG_ID_PREFIX=${INSTALLER_PKG_ID_PREFIX:-com.GeneKo}
