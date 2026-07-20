@@ -239,7 +239,7 @@ BEGIN
             VALUE "FileDescription", "Anti-Static"
             VALUE "InternalName", "AntiStatic"
             VALUE "ProductName", "Anti-Static"
-            VALUE "CompanyName", "GeneKo"
+            VALUE "CompanyName", "Gene Ko"
             VALUE "LegalCopyright", "Copyright 2022 Steven Atkinson, 2026 Gene Ko"
             VALUE "LegalTrademarks", "VST is a trademark of Steinberg Media Technologies GmbH, Audio Unit is a trademark of Apple, Inc."
         END

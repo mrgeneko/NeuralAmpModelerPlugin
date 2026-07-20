@@ -33,9 +33,10 @@ def main():
         config["MAJOR_STR"], config["MINOR_STR"], config["BUGFIX_STR"]
     )
 
-    # Only the values that track config.h. Plug-in and company names are left
-    # alone: they are already correct, and rewriting them here would mean two
-    # places could disagree about them.
+    # CompanyName is synced from PLUG_MFR because main.rc had drifted to
+    # "GeneKo" while config.h said "Gene Ko" -- the spaceless form belongs to
+    # BUNDLE_MFR, which builds the com.GeneKo.* bundle identifiers and must stay
+    # as it is. Leaving names unsynced is what allowed that to diverge.
     substitutions = [
         (r"(^\s*FILEVERSION\s+)[\d,]+", r"\g<1>" + comma_version),
         (r"(^\s*PRODUCTVERSION\s+)[\d,]+", r"\g<1>" + comma_version),
@@ -45,6 +46,7 @@ def main():
             r'(VALUE "LegalCopyright",\s*")[^"]*"',
             r"\g<1>" + config["PLUG_COPYRIGHT_STR"] + '"',
         ),
+        (r'(VALUE "CompanyName",\s*")[^"]*"', r"\g<1>" + config["PLUG_MFR"] + '"'),
     ]
 
     for pattern, replacement in substitutions:
